@@ -18,7 +18,6 @@ public class ViewController {
     public ModelAndView viewer(HttpServletRequest request) {
         String restOfTheUrl = (String) request.getAttribute(
                 HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-        System.err.println(restOfTheUrl);
         String [] split = restOfTheUrl.split("/");
         String path = restOfTheUrl + "/" + split[split.length-1];
         return new ModelAndView(path);

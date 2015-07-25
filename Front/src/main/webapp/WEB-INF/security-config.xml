@@ -15,10 +15,10 @@
         <authentication-provider>
             <password-encoder hash="bcrypt" />
             <jdbc-user-service data-source-ref="dataSource"
-                               authorities-by-username-query="SELECT sys_user.email , role_id from sys_user
+                               authorities-by-username-query="SELECT sys_user.login , sys_role.role_name from sys_user
                                                         JOIN sys_role ON sys_user.role_id = sys_role.id
-                                                        WHERE sys_user.email = ?"
-                               users-by-username-query="SELECT email,hash_pwd,1 FROM sys_user where email = ?"/>
+                                                        WHERE sys_user.login = ?"
+                               users-by-username-query="SELECT login,hash_pwd,1 FROM sys_user where login = ?"/>
         </authentication-provider>
     </authentication-manager>
 
