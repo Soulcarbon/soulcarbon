@@ -21,7 +21,7 @@ public class UserService extends AbstractService implements BootsrapService<User
     private RoleRepository roleRepository;
 
     @Override
-    public List<User> bootstrap(HashMap<String, Object> map) {
+    public void bootstrap(HashMap<String, Object> map) {
         if(userRepository.count(User.class) == 0) {
 
             String login = "admin";
@@ -39,9 +39,9 @@ public class UserService extends AbstractService implements BootsrapService<User
                 fullName = (String) map.get("fullName");
             }
 
-            Role role = roleRepository.getRoleByName("ROLE_ADMIN");
+            Role role = roleRepository.getSingleEntityByFieldAndValue(Role.class, "roleName" , "ROLE_ADMIN");
             if (role == null) {
-                return null;
+                return;
             }
 
             User user = new User();
@@ -52,10 +52,8 @@ public class UserService extends AbstractService implements BootsrapService<User
             user.setEnabled(true);
             user.setPwdTransient(password);
             userRepository.create(user);
-            return Arrays.asList(user);
+            return;
 
-        } else {
-            return userRepository.list(User.class);
         }
     }
 }

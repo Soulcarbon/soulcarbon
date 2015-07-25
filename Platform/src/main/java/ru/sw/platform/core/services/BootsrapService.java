@@ -5,5 +5,5 @@ import java.util.List;
 
 public interface BootsrapService<T> {
 
-    public List<T> bootstrap(HashMap<String,Object> map);
+    public void bootstrap(HashMap<String,Object> map);
 }

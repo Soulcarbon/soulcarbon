@@ -1,5 +1,12 @@
 {
     "text" : {
-        "bootstrap" : "bootstrap"
+        "bootstrap" : "первоначльная установка",
+        "bootstrap_login" : "логин главного администратора",
+        "bootstrap_password" : "пароль главного администратора",
+        "bootstrap_full_name" : "имя администратора",
+        "bootstrap_id_services" : "идентификатор сервиса",
+        "bootstrap_service_name" : "наименование сервиса",
+        "bootstrap_state" : "состояние задачи",
+        "bootstrap_error_message" : "сообщение об ошибке"
     }
 }

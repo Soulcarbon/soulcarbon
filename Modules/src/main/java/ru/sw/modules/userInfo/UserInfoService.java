@@ -31,12 +31,12 @@ public class UserInfoService extends AbstractService implements BootsrapService<
         if(principal == null) {
             return null;
         }
-        return  userInfoRepository.getUserInfoByLogin(principal.getName());
+        return  userInfoRepository.getSingleEntityByFieldAndValue(UserInfo.class , "user.login" ,principal.getName());
     }
 
 
     @Override
-    public List<UserInfo> bootstrap(HashMap<String, Object> map) {
+    public void bootstrap(HashMap<String, Object> map) {
         if(userInfoRepository.count(UserInfo.class) == 0){
 
             List<User> list = userRepository.list(User.class);
@@ -50,8 +50,8 @@ public class UserInfoService extends AbstractService implements BootsrapService<
             userInfo.setUser(admin);
             userInfo.setInfo("main admin");
             userInfoRepository.create(userInfo);
-            return Arrays.asList(userInfo);
+            return;
         }
-        return userInfoRepository.list(UserInfo.class);
+        return;
     }
 }

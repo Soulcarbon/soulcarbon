@@ -1,10 +1,28 @@
-Bootstraping model
+<link rel="stylesheet" href="/resources/css/table.css">
+<h3>{{application.text["bootstrap"]}}</h3>
 
-<div>
-    <label>Login</label> <input type="text" ng-model="bootstrapModel.login" name="login"> <br>
-    <label>Password</label> <input type="text" ng-model="bootstrapModel.password" name="password"> <br>
-    <label>FullName</label> <input type="text" ng-model="bootstrapModel.fullName" name="fullName"> <br>
-</div>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">{{application.text["bootstrap_login"]}}</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Admin" ng-model="bootstrapModel.login" >
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">{{application.text["bootstrap_password"]}}</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-model="bootstrapModel.password">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">{{application.text["bootstrap_full_name"]}}</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="inputEmail3" placeholder="Admin" ng-model="bootstrapModel.fullName" >
+        </div>
+    </div>
+
+</form>
 
 <div>
     {{bootstrapModel}}
@@ -12,16 +30,16 @@ Bootstraping model
 
 <li><a href="#" class="button big" ng-click="bootstrap(bootstrapModel)">Bootstrap</a></li>
 
-<link rel="stylesheet" href="/resources/css/table.css">
+
 <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
 
     <!-- Table Header -->
     <thead>
     <tr>
-        <th>Id service</th>
-        <th>Service Name</th>
-        <th>State</th>
-        <th>ErrorMessage</th>
+        <th>{{application.text["bootstrap_id_services"]}}</th>
+        <th>{{application.text["bootstrap_service_name"]}}</th>
+        <th>{{application.text["bootstrap_state"]}}</th>
+        <th>{{application.text["bootstrap_error_message"]}}</th>
     </tr>
     </thead>
     <!-- Table Header -->

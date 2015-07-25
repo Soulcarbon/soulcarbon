@@ -42,11 +42,12 @@ public class InitialServiceInfoService extends AbstractService {
         services.put(userInfoService , new InitialServiceInfo("userInfoService"));
 
         for(Map.Entry<BootsrapService<?> , InitialServiceInfo> entry : services.entrySet()) {
-            InitialServiceInfo info = initialServiceInfoRepository.getInitialServiceByName(entry.getValue().getServiceName());
-            if( info == null ) {
+            List<InitialServiceInfo> info = initialServiceInfoRepository.
+                    getEntitiesByFieldAndValue(InitialServiceInfo.class, "serviceName", entry.getValue().getServiceName());
+            if( info.isEmpty()) {
                 initialServiceInfoRepository.create(entry.getValue());
             } else {
-                entry.setValue(info);
+                entry.setValue(info.get(0));
             }
         }
     }

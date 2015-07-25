@@ -1,5 +1,12 @@
 {
   "text" : {
-    "bootstrap" : "первоначальные сервисы"
+    "bootstrap" : "Bootstrapping",
+    "bootstrap_login" : "Login of main admin",
+    "bootstrap_password" : "Password of main admin",
+    "bootstrap_full_name" : "Full name",
+    "bootstrap_id_services" : "Service id",
+    "bootstrap_service_name" : "Service name",
+    "bootstrap_state" : "State",
+    "bootstrap_error_message" : "Error message"
   }
 }

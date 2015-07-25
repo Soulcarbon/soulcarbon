@@ -3,10 +3,12 @@ package ru.sw.platform.core.repositories;
 import org.hibernate.Session;
 import ru.sw.platform.core.entity.AbstractEntity;
 import org.springframework.transaction.annotation.Transactional;
+import ru.sw.platform.core.exceptions.PlatofrmExecption;
 
 import javax.management.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.lang.reflect.Field;
 import java.util.List;
 
 public abstract class AbstractRepository<T extends AbstractEntity> {
@@ -83,5 +85,15 @@ public abstract class AbstractRepository<T extends AbstractEntity> {
         return rowCnt;
     }
 
+    public List<T> getEntitiesByFieldAndValue(Class<T> classEntity ,String field, Object value) {
+        List<T> list = entityManager.createQuery("select ent from " + classEntity.getSimpleName() + " ent where ent."+field+"=:value")
+                .setParameter("value" , value).getResultList();
+
+        return list;
+    }
+    public T getSingleEntityByFieldAndValue(Class<T> classEntity ,String field, Object value) {
+        List<T> list = getEntitiesByFieldAndValue(classEntity,field,value);
+        return list.isEmpty() ? null : list.get(0);
+    }
 
 }

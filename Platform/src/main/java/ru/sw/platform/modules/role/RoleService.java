@@ -19,12 +19,12 @@ public class RoleService extends AbstractService implements BootsrapService<Role
     @Action(name = "getRoleByName")
     public Role getRoleByName(HashMap<String,Object> data) {
         String roleName = (String) data.get("roleName");
-        Role role = roleRepository.getRoleByName(roleName);
+        Role role = roleRepository.getSingleEntityByFieldAndValue(Role.class , "roleName" , roleName);
         return role;
     }
 
     @Override
-    public List<Role> bootstrap(HashMap<String, Object> map) {
+    public void bootstrap(HashMap<String, Object> map) {
         if(roleRepository.count(Role.class) == 0) {
             Role role = new Role();
             role.setRoleName("ROLE_ADMIN");
@@ -34,9 +34,6 @@ public class RoleService extends AbstractService implements BootsrapService<Role
 
             roleRepository.create(role);
             roleRepository.create(role2);
-            return Arrays.asList(role , role2);
-        } else {
-            return roleRepository.list(Role.class);
         }
     }
 }

@@ -261,7 +261,7 @@ public class DataController {
             throw new PlatofrmExecption("Not authorized user can't update entity", PlatofrmExecption.Type.UpdateError);
         }
 
-        User user = userRepository.getUserByLogin(principal.getName());
+        User user = userRepository.getSingleEntityByFieldAndValue(User.class , "login",principal.getName());
         if (user.getRole().getRoleName().equals("ROLE_ADMIN")) {
             return;
         }
@@ -300,7 +300,7 @@ public class DataController {
         if(p.getName() == null) {
             return  null;
         } else {
-            User user = userRepository.getUserByLogin(p.getName());
+            User user = userRepository.getSingleEntityByFieldAndValue(User.class, "login", p.getName());;
             return user;
         }
     }

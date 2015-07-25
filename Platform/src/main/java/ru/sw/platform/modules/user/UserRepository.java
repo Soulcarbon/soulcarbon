@@ -17,15 +17,6 @@ public class UserRepository extends AbstractRepository<User> {
     @Autowired
     RoleRepository roleRepository;
 
-    public User getUserByLogin(String login) {
-        List<User> userList = entityManager.createQuery("select u from User u where u.login = :login").setParameter("login" , login).getResultList();
-        if (userList.isEmpty()) {
-            return null;
-        } else {
-            return userList.get(0);
-        }
-    }
-
     @Override
     @Transactional
     public void create(User object) {
