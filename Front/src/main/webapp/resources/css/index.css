@@ -1,0 +1,13 @@
+body{
+    font-family: 'Lora', serif;
+}
+
+.language {
+    padding: 10px;
+    background: #cccccc;
+    cursor: pointer;
+}
+
+.language-active{
+    background: #3e99dc;
+}
