@@ -20,7 +20,24 @@ public class Weapon extends AbstractEntity {
     @Column(length = 2000 , name = "image_url")
     private String imageUrl;
 
-    private double price;
+    private double dollarPrice;
+    private double rublePrice;
+
+    public double getDollarPrice() {
+        return dollarPrice;
+    }
+
+    public void setDollarPrice(double dollarPrice) {
+        this.dollarPrice = dollarPrice;
+    }
+
+    public double getRublePrice() {
+        return rublePrice;
+    }
+
+    public void setRublePrice(double rublePrice) {
+        this.rublePrice = rublePrice;
+    }
 
     @Column(unique = true, name="class_id")
     private String classId;
@@ -40,14 +57,6 @@ public class Weapon extends AbstractEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getClassId() {
