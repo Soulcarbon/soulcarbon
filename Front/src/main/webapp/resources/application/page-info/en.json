@@ -1,8 +1,12 @@
 {
   "language" : "en",
   "text" : {
-    "author" : "author",
-    "about" : "about",
-    "citation" : "Free your mind requires a reason, and others - only faith."
+
+    "History":"History",
+    "TopWinners":"Top Winners",
+    "Rules":"Rules",
+    "Contact":"Contact"
+
+
   }
 }
