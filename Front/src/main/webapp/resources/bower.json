@@ -19,6 +19,7 @@
     "angular": "~1.4.3",
     "fontawesome": "~4.3.0",
     "jQuery": "~2.1.4",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "ng-websocket": "git://github.com/wilk/ng-websocket.git#master"
   }
 }

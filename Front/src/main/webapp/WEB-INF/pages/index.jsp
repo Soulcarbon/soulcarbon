@@ -25,7 +25,7 @@
 
             <!-- Logo -->
             <h1><a href="index.html">{{application.projectName}}</a></h1>
-
+            <button ng-click="wsEmit()">Click me</button>
             <!-- Nav -->
             <nav id="nav">
                 <ul>
@@ -96,7 +96,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="language" ng-class="pageInfo.language == 'ru' ? 'language-active' : ''" ng-click="changeLanguage('ru')">Ru</li>
+                                        <li class="language" ng-class="pageInfo.language == 'ru' ? 'language-active' : ''" ng-click="changeLanguage('ru')">Ru</li>
                     <li class="language" ng-class="pageInfo.language == 'en' ? 'language-active' : ''" ng-click="changeLanguage('en')">En</li>
 
                 </ul>
@@ -114,6 +114,7 @@
 <script src="/resources/bower_components/jQuery/dist/jquery.min.js"></script>
 <script src="/resources/bower_components/angular/angular.min.js"></script>
 <script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/resources/bower_components/ng-websocket/ng-websocket.js"></script>
 <script src="/resources/application/platform.js"></script>
 <script src="/resources/application/index.js"></script>
 <c:forEach items="${scripts}" var="src">
