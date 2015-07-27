@@ -1,17 +1,19 @@
 package ru.sw.modules.steam.utils;
 
+import javax.persistence.Embeddable;
 import java.util.Map;
 
-public class ValuteEntry {
+@Embeddable
+public class Price {
     private double rub;
     private double usd;
 
-    public ValuteEntry(double rub, double usd) {
+    public Price(double rub, double usd) {
         this.rub = rub;
         this.usd = usd;
     }
 
-    public ValuteEntry() {
+    public Price() {
     }
 
     public double getRub() {
@@ -28,5 +30,19 @@ public class ValuteEntry {
 
     public void setUsd(double usd) {
         this.usd = usd;
+    }
+
+
+    public void addPrice(Price p) {
+        this.rub += p.getRub();
+        this.usd += p.getUsd();
+    }
+
+    @Override
+    public String toString() {
+        return "Price{" +
+                "rub=" + rub +
+                ", usd=" + usd +
+                '}';
     }
 }

@@ -1,24 +1,18 @@
 package ru.sw.modules.steam.utils;
 
-import org.apache.commons.httpclient.URIException;
 import org.apache.commons.httpclient.util.URIUtil;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 import ru.sw.modules.game.player.Player;
 import ru.sw.modules.weapon.Weapon;
 import ru.sw.platform.core.exceptions.PlatofrmExecption;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.text.ParseException;
 
 public class SteamUtil {
 
@@ -47,9 +41,8 @@ public class SteamUtil {
                     //Dollar(USD)
                     if (price.startsWith("&#36;")) {
                         price = price.replace("&#36;", "");
-                        ValuteEntry valuteEntry = Utils.convertDollarToRuble(price);
-                        weapon.setDollarPrice(valuteEntry.getUsd());
-                        weapon.setRublePrice(valuteEntry.getRub());
+                        Price valuteEntry = Utils.convertDollarToRuble(price);
+                        weapon.setPrice(valuteEntry);
                     }
 
                     return weapon;

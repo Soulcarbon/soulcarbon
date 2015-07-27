@@ -14,8 +14,7 @@ public class SteamTest {
         Weapon weapon =SteamUtil.getWeaponByClassId("310776543", "730");
         System.err.println(weapon.getClassId());
         System.err.println(weapon.getWeaponName());
-        System.err.println(weapon.getDollarPrice());
-        System.err.println(weapon.getRublePrice());
+        System.err.println(weapon.getPrice());
 
         Player player = SteamUtil.getPlayerBySteamId("76561198033391771");
         System.err.println(player.getNickName());

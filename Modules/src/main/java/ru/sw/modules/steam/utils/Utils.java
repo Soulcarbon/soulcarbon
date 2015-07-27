@@ -15,9 +15,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class Utils {
     public static JSONObject readJsonFromUrl(String url) throws IOException, JSONException {
@@ -49,7 +47,7 @@ public class Utils {
         return "";
     }
 
-    public static ValuteEntry convertDollarToRuble(String dollar) throws ParserConfigurationException, IOException, SAXException, ParseException {
+    public static Price convertDollarToRuble(String dollar) throws ParserConfigurationException, IOException, SAXException, ParseException {
         DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
         Document doc = builder.parse("http://www.cbr.ru/scripts/XML_daily.asp?");
 
@@ -75,6 +73,6 @@ public class Utils {
         number = format.parse(dollar);
         double usd = number.doubleValue();
         double rub = course*usd;
-        return new ValuteEntry(rub,usd);
+        return new Price(rub,usd);
     }
 }

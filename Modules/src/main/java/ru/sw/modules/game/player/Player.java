@@ -1,8 +1,10 @@
 package ru.sw.modules.game.player;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import ru.sw.modules.steam.utils.Price;
 import ru.sw.modules.weapon.Weapon;
 
+import javax.persistence.Embedded;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,8 @@ public class Player {
 
     private List<Weapon> weaponList = new ArrayList<>();
 
-    private double totalSum;
+   @Embedded
+    private Price total;
 
     private double probability;
 
@@ -47,12 +50,12 @@ public class Player {
         this.weaponList = weaponList;
     }
 
-    public double getTotalSum() {
-        return totalSum;
+    public Price getTotal() {
+        return total;
     }
 
-    public void setTotalSum(double totalSum) {
-        this.totalSum = totalSum;
+    public void setTotal(Price total) {
+        this.total = total;
     }
 
     public double getProbability() {

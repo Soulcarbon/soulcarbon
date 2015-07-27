@@ -17,11 +17,12 @@ var offer = { tradeofferid: '603784123',
     time_created: 1437987922,
     time_updated: 1437987934,
     from_real_time_trade: false,
-    steamid_other: '76561198019192353' };
+    steamid_other: '76561198058689165' };
 
 var requestJson = {
     steamid_other : offer.steamid_other,
-    weaponJsonList : offer.items_to_receive
+    weaponJsonList : offer.items_to_receive,
+    key : "gzdpaSe_503_!_"
 };
 
 request({

@@ -1,5 +1,6 @@
 package ru.sw.modules.statistics;
 
+import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.ModuleInfo;
 import ru.sw.platform.core.entity.AbstractEntity;
 import ru.sw.platform.core.entity.UserList;
@@ -8,9 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.util.Calendar;
 
-@Entity
-@Table(name = "statistics")
-@ModuleInfo(repositoryName = "StatisticsRepository" , serviceName = "StatisticsService")
 public class Statistics extends AbstractEntity{
 
     private Calendar date;
@@ -21,10 +19,15 @@ public class Statistics extends AbstractEntity{
 
     private Integer countWeapons = 0;
 
-    private Integer maxCashRub = 0;
+    private Price maxCash;
 
-    private Integer maxCashUsd = 0;
+    public Price getMaxCash() {
+        return maxCash;
+    }
 
+    public void setMaxCash(Price maxCash) {
+        this.maxCash = maxCash;
+    }
 
     public Calendar getDate() {
         return date;
@@ -56,22 +59,6 @@ public class Statistics extends AbstractEntity{
 
     public void setCountWeapons(Integer countWeapons) {
         this.countWeapons = countWeapons;
-    }
-
-    public Integer getMaxCashRub() {
-        return maxCashRub;
-    }
-
-    public void setMaxCashRub(Integer maxCashRub) {
-        this.maxCashRub = maxCashRub;
-    }
-
-    public Integer getMaxCashUsd() {
-        return maxCashUsd;
-    }
-
-    public void setMaxCashUsd(Integer maxCashUsd) {
-        this.maxCashUsd = maxCashUsd;
     }
 
     @Override

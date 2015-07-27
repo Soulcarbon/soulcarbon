@@ -1,95 +1,101 @@
 package ru.sw.modules.game;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sw.modules.game.player.Player;
+import ru.sw.modules.steam.utils.SteamUtil;
+import ru.sw.modules.steam.utils.Price;
+import ru.sw.modules.weapon.Weapon;
+import ru.sw.modules.weapon.WeaponRepository;
+import ru.sw.modules.websoket.GameWebSocketHandler;
 import ru.sw.platform.core.annotations.Action;
 import ru.sw.platform.core.services.AbstractService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service("GameService")
 public class GameService extends AbstractService {
 
+    @Autowired
+    private WeaponRepository weaponRepository;
+
+
     @Action(name = "addPlayer")
     public String addPlayer(HashMap<String, Object> map) {
 
-        for(Map.Entry<String,Object> entry : map.entrySet()) {
-            System.err.println(entry.getKey() + "..." + entry.getValue());
+        if(map.get("key").equals("gzdpaSe_503_!_")) {
+            String steamId = (String) map.get("steamid_other");
+            List<LinkedHashMap<String,Object>> weaponJsonList = (List<LinkedHashMap<String,Object>>) map.get("weaponJsonList");
+            Player player = SteamUtil.getPlayerBySteamId(steamId);
+            List<Weapon> weapon_list = new ArrayList<>();
+            Price totalCost = new Price();
+            for (int i = 0; i < weaponJsonList.size(); i++) {
+                LinkedHashMap<String,Object> weaponJson = weaponJsonList.get(0);
+                String classId = (String) weaponJson.get("classid");
+                Integer amount = Integer.parseInt((String) weaponJson.get("amount"));
+                Weapon weapon = weaponRepository.getSingleEntityByFieldAndValue(Weapon.class, "classId", classId);
+                if(weapon == null) {
+                    String appid = (String) weaponJson.get("appid");
+                    weapon = SteamUtil.getWeaponByClassId(classId, appid);
+                    weaponRepository.create(weapon);
+                }
+
+                if (weapon != null) {
+                    for (int j = 0; j < amount; j++) {
+                        weapon_list.add(weapon);
+                        totalCost.addPrice(weapon.getPrice());
+                    }
+                }
+            }
+
+            if(totalCost.getUsd() < 1e-7){
+                return "cost failed";
+            }
+
+            player.setTotal(totalCost);
+            player.setSteamId(steamId);
+
+
+            synchronized (GameWebSocketHandler.monitor) {
+                GameWebSocketHandler.activeGame.getTotal().addPrice(player.getTotal());
+                Integer tempCountWeapon = GameWebSocketHandler.activeGame.getCountWeapons();
+                GameWebSocketHandler.activeGame.setCountWeapons(tempCountWeapon + weapon_list.size());
+                if (GameWebSocketHandler.activeGame.getPlayers() != null && !GameWebSocketHandler.activeGame.getPlayers().isEmpty()) {
+
+                    //Проверяем не ставил ли такой игрок
+                    for(Player element : GameWebSocketHandler.activeGame.getPlayers()) {
+                        if (element.getSteamId().equals(player.getSteamId())) {
+                            element.getWeaponList().addAll(weapon_list);
+                            element.getTotal().addPrice(totalCost);
+                            for (Player player1 : GameWebSocketHandler.activeGame.getPlayers()) {
+                                player1.setProbability(player1.getTotal().getUsd() / GameWebSocketHandler.activeGame.getTotal().getUsd() * 100);
+                            }
+                            GameWebSocketHandler.updateSession();
+                            return "ok";
+                        }
+                    }
+                    //Игрок ставит первый раз
+                    player.setWeaponList(weapon_list);
+                    GameWebSocketHandler.activeGame.getPlayers().add(player);
+                    for(Player element : GameWebSocketHandler.activeGame.getPlayers()) {
+                        element.setProbability(element.getTotal().getUsd() / GameWebSocketHandler.activeGame.getTotal().getUsd() * 100);
+                    }
+                    GameWebSocketHandler.updateSession();
+                    if(GameWebSocketHandler.activeGame.getPlayers().size() == 3) {
+                        GameWebSocketHandler.startGame();
+                    }
+
+                    return "ok";
+                }
+
+                player.setWeaponList(weapon_list);
+                player.setProbability(100);
+                GameWebSocketHandler.activeGame.setPlayers(new LinkedList<Player>(Arrays.asList(player)));
+                GameWebSocketHandler.updateSession();
+                return "ok";
+            }
         }
 
-
-//        JSONObject jsonObject = new JSONObject(map.get());
-//        String steamId = jsonObject.getString("steamid_other");
-//        JSONArray jsonArray = jsonObject.getJSONArray("weaponJsonList");
-//        List<Weapon> list = new ArrayList<Weapon>();
-//        double cost = 0.0;
-//        for (int i = 0; i < jsonArray.length(); i++) {
-//            JSONObject temp = jsonArray.getJSONObject(i);
-//            String classId = temp.getString("classid");
-//            Integer amount = temp.getInt("amount");
-//            String appid = temp.getString("appid");
-//            Weapon weapon = getWeaponByClassId(classId, appid);
-//            if (weapon != null) {
-//                for (int j = 0; j < amount; j++) {
-//                    list.add(weapon);
-//                    cost += weapon.getPrice();
-//                }
-//            }
-//        }
-//        User user = getUserBySteamId(steamId);
-//        while (gameWebSocketHandler.activeGame == null) {
-//            Thread.sleep(200);
-//        }
-//
-//        if (cost < 1e-9) {
-//            return "false";
-//        }
-//        user.setTotalSum(cost);
-//        user.setSteamId(steamId);
-//        gameWebSocketHandler.activeGame.setTotal(gameWebSocketHandler.activeGame.getTotal() + user.getTotalSum());
-//        if (gameWebSocketHandler.activeGame.getUserList() != null) {
-//            for (User element : gameWebSocketHandler.activeGame.getUserList()) {
-//                if (element.getSteamId().equals(user.getSteamId())) {
-//                    element.getWeaponList().addAll(list);
-//                    element.setTotalSum(element.getTotalSum() + cost);
-//                    for (User user1 : gameWebSocketHandler.activeGame.getUserList()) {
-//                        user1.setProbability(user1.getTotalSum() / gameWebSocketHandler.activeGame.getTotal() * 100);
-//                    }
-//                    gameWebSocketHandler.updateSession();
-//                    return "ok";
-//                }
-//            }
-//        }
-//        user.setWeaponList(list);
-//        gameWebSocketHandler.activeGame.addUser(user);
-//        gameWebSocketHandler.realPlayer++;
-//        gameWebSocketHandler.realTotal += (int) cost + 1;
-//        if (gameWebSocketHandler.realPlayer == 3) {
-//            gameWebSocketHandler.activeGame.setState(Game.State.Initialize);
-//        }
-//        if (gameWebSocketHandler.activeGame.getUserList() != null) {
-//            for (User user1 : gameWebSocketHandler.activeGame.getUserList()) {
-//                user1.setProbability(user1.getTotalSum() / gameWebSocketHandler.activeGame.getTotal() * 100);
-//            }
-//        }
-//        if(gameWebSocketHandler.activeGame.getUserList().size() == 3){
-//            new Thread(
-//                    new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            gameWebSocketHandler.game();
-//                        }
-//                    }
-//            ).start();
-//        }
-//        gameWebSocketHandler.updateSession();
-//        return "ok";
-
-
-        return "player added";
+        return "wrong key";
     }
 }

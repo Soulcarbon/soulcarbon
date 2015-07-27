@@ -1,6 +1,7 @@
 package ru.sw.modules.game;
 
 import ru.sw.modules.game.player.Player;
+import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.ModuleInfo;
 import ru.sw.platform.core.entity.AbstractEntity;
 import ru.sw.platform.core.entity.UserList;
@@ -29,8 +30,8 @@ public class Game extends AbstractEntity {
     @Column(name = "count_visitors")
     private Integer countVisitors = 0;
 
-    @Column(name = "total_cash")
-    private Integer totalCash = 0;
+    @Embedded
+    private Price total = new Price();
 
     @Column(name = "count_weapons")
     private Integer countWeapons = 0;
@@ -38,6 +39,9 @@ public class Game extends AbstractEntity {
     @Column(name = "seconds_before_round_over")
     private Integer secondsBeforeRoundOver = 300;
 
+    private String lastWinnerNickName;
+
+    private String lastWinnerImageUrl;
 
     public List<Player> getPlayers() {
         return players;
@@ -55,12 +59,12 @@ public class Game extends AbstractEntity {
         this.countVisitors = countVisitors;
     }
 
-    public Integer getTotalCash() {
-        return totalCash;
+    public Price getTotal() {
+        return total;
     }
 
-    public void setTotalCash(Integer totalCash) {
-        this.totalCash = totalCash;
+    public void setTotal(Price total) {
+        this.total = total;
     }
 
     public Integer getCountWeapons() {
@@ -85,6 +89,22 @@ public class Game extends AbstractEntity {
 
     public void setState(GameState state) {
         this.state = state;
+    }
+
+    public String getLastWinnerNickName() {
+        return lastWinnerNickName;
+    }
+
+    public void setLastWinnerNickName(String lastWinnerNickName) {
+        this.lastWinnerNickName = lastWinnerNickName;
+    }
+
+    public String getLastWinnerImageUrl() {
+        return lastWinnerImageUrl;
+    }
+
+    public void setLastWinnerImageUrl(String lastWinnerImageUrl) {
+        this.lastWinnerImageUrl = lastWinnerImageUrl;
     }
 
     @Override

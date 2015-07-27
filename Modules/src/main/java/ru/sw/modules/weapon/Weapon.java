@@ -1,10 +1,12 @@
 package ru.sw.modules.weapon;
 
+import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.ModuleInfo;
 import ru.sw.platform.core.entity.AbstractEntity;
 import ru.sw.platform.core.entity.UserList;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -20,23 +22,15 @@ public class Weapon extends AbstractEntity {
     @Column(length = 2000 , name = "image_url")
     private String imageUrl;
 
-    private double dollarPrice;
-    private double rublePrice;
+    @Embedded
+    private Price price;
 
-    public double getDollarPrice() {
-        return dollarPrice;
+    public Price getPrice() {
+        return price;
     }
 
-    public void setDollarPrice(double dollarPrice) {
-        this.dollarPrice = dollarPrice;
-    }
-
-    public double getRublePrice() {
-        return rublePrice;
-    }
-
-    public void setRublePrice(double rublePrice) {
-        this.rublePrice = rublePrice;
+    public void setPrice(Price price) {
+        this.price = price;
     }
 
     @Column(unique = true, name="class_id")
