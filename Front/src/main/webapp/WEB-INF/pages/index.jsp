@@ -7,14 +7,15 @@
     <title>todo</title>
     <meta charset="utf-8"/>
     <meta name="viewport content=" width=device-width, initial-scale=1"/>
-    <%--<link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">--%>
-    <%--<link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">--%>
+    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
 
     <link href='http://fonts.googleapis.com/css?family=Lora&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link href="/resources/css/index.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700&subset=latin,cyrillic' rel='stylesheet'
           type='text/css'>
-
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
+    <link rel="stylesheet" href="/resources/bower_components/fontawesome/css/font-awesome.min.css">
 </head>
 <body>
 <header class="header-basic">
@@ -41,6 +42,9 @@
     </div>
 
 </header>
+
+
+
 <div class="wrapper">
     <div ui-view></div>
 </div>
