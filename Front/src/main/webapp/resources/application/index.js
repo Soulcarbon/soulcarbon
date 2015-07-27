@@ -3,55 +3,22 @@ model.controller("indexController",function($scope,$http,applicationService,$sta
 
     var ws = $websocket.$new('ws://localhost:8080/connectToGame'); // instance of ngWebsocket, handled by $websocket service
 
+    $scope.game = null;
     ws.$on('$open', function () {
-        console.log('Oh my gosh, websocket is really open! Fukken awesome!');
-
-        ws.$emit('ping', 'hi listening websocket server'); // send a message to the websocket server
-
-        var data = {
-            level: 1,
-            text: 'ngWebsocket rocks!',
-            array: ['one', 'two', 'three'],
-            nested: {
-                level: 2,
-                deeper: [{
-                    hell: 'yeah'
-                }, {
-                    so: 'good'
-                }]
-            }
-        };
-
-        ws.$emit('pong', data);
+        console.log('web socket open');
     });
 
     ws.$on('$message', function (data) {
-        console.log('The websocket server has sent the following data:');
-        console.log(data);
-
+        console.log("Game was updated");
+        $scope.$apply(function() {
+            $scope.game = data;
+        });
     });
 
     ws.$on('$close', function () {
-        console.log('Noooooooooou, I want to have more fun with ngWebsocket, damn it!');
+        console.log('webscoket close');
     });
 
-    $scope.wsEmit = function() {
-        var data = {
-            level: 1,
-            text: 'ngWebsocket rocks!',
-            array: ['one', 'two', 'three'],
-            nested: {
-                level: 2,
-                deeper: [{
-                    hell: 'yeah'
-                }, {
-                    so: 'good'
-                }]
-            }
-        };
-
-        ws.$emit('pong', data);
-    };
 
     applicationService.pageInfo($scope);
 

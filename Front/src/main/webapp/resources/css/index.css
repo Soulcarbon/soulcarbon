@@ -113,7 +113,7 @@ body{
 }
 
 .header-basic .header-limiter nav div.selected {
-    color: #608bd2;a
+    color: #608bd2;
     pointer-events: none;
     opacity: 1;
 }

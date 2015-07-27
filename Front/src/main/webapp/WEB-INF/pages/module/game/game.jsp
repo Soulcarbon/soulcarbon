@@ -1,3 +1,0 @@
-Super Game
-{{application}}
-{{gameInfo}}
