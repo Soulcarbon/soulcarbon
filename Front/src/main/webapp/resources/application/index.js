@@ -1,5 +1,24 @@
-var model = angular.module("mainApp" , ["BackEndService"]);
-model.controller("indexController",function($scope,$http,applicationService,$state){
+var model = angular.module("mainApp" , ["BackEndService" , 'ngWebsocket']);
+model.controller("indexController",function($scope,$http,applicationService,$state,$websocket){
+
+    var ws = $websocket.$new('ws://localhost:8080/connectToGame'); // instance of ngWebsocket, handled by $websocket service
+
+    $scope.game = null;
+    ws.$on('$open', function () {
+        console.log('web socket open');
+    });
+
+    ws.$on('$message', function (data) {
+        console.log("Game was updated");
+        $scope.$apply(function() {
+            $scope.game = data;
+        });
+    });
+
+    ws.$on('$close', function () {
+        console.log('webscoket close');
+    });
+
 
     applicationService.pageInfo($scope);
 

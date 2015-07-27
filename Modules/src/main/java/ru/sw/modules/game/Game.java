@@ -5,10 +5,7 @@ import ru.sw.platform.core.annotations.ModuleInfo;
 import ru.sw.platform.core.entity.AbstractEntity;
 import ru.sw.platform.core.entity.UserList;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +13,15 @@ import java.util.List;
 @Table(name = "game")
 @ModuleInfo(repositoryName = "GameRepository" , serviceName = "GameService")
 public class Game extends AbstractEntity {
+
+    public enum GameState {
+        Wait,
+        Active,
+        Finished
+    }
+
+    @Enumerated(EnumType.STRING)
+    private GameState state = GameState.Wait;
 
     @Transient
     private List<Player> players = new ArrayList<>();
@@ -71,6 +77,14 @@ public class Game extends AbstractEntity {
 
     public void setSecondsBeforeRoundOver(Integer secondsBeforeRoundOver) {
         this.secondsBeforeRoundOver = secondsBeforeRoundOver;
+    }
+
+    public GameState getState() {
+        return state;
+    }
+
+    public void setState(GameState state) {
+        this.state = state;
     }
 
     @Override
