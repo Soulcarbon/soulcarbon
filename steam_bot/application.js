@@ -104,7 +104,7 @@ steamUser.on('tradeOffers', function (number) {
                                         headers: {
                                             "content-type" : 'application/x-www-form-urlencoded'
                                         },
-                                        body: "className=&ru.sw.modules.game.Game&actionName=addPlayer&data="+JSON.stringify(requestJson)
+                                        body: "className=ru.sw.modules.game.Game&actionName=addPlayer&data="+JSON.stringify(requestJson)
                                     }, function (error, response, body) {
                                         console.log("body : " + body);
                                     });
