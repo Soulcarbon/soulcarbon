@@ -31,7 +31,9 @@
                     <span class="icon-bar"></span>
                 </button>
                     <div class="navbar-brand logo">
-                        <img class="logo2" src="/resources/img/logo4.png">
+                        <a ui-sref="home">
+                            <img class="logo2" src="/resources/img/logo4.png">
+                        </a>
                     </div>
             </div>
 
