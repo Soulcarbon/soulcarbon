@@ -19,11 +19,14 @@
     </div>
     <div class="col-lg-9">
         <div class="content">
-            <div class="content1">страница игры</div>
+           <div class="currentGame">
+               Игра № {{game.id}}
+               Банк {{application.language == 'ru' ? game.total.rub : game.total.usd}} {{application.text.valute}}
+           </div>
         </div>
     </div>
 </div>
 <div class="row">
-    {{application}}
+    {{game}}
 </div>
 

@@ -51,26 +51,6 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <%--<div class="header-limiter">--%>
-
-        <%--<div class="logo">--%>
-            <%--<h1>--%>
-                <%--<img class="logo2" src="/resources/img/logo4.png">--%>
-            <%--</h1>--%>
-        <%--</div>--%>
-
-        <%--<nav>--%>
-
-            <%--<a href="#">{{application.text.History}}</a>--%>
-            <%--<a href="#">{{application.text.TopWinners}}</a>--%>
-
-            <%--<a href="#">{{application.text.Rules}}</a>--%>
-            <%--<a href="#">{{application.text.Contact}}</a>--%>
-
-            <%--<div ng-class="pageInfo.language == 'en' ? 'selected' : ''" ng-click="changeLanguage('en')">en</div>--%>
-            <%--<div ng-class="pageInfo.language == 'ru' ? 'selected' : ''" ng-click="changeLanguage('ru')">ru</div>--%>
-        <%--</nav>--%>
-    <%--</div>--%>
 
 </header>
 

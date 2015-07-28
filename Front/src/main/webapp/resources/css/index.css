@@ -220,10 +220,10 @@ body {
 /*модели игроков,побед,история,итп*/
 
 .content{
-    background: #999  ;
 }
-.content1{
-    padding: 30px;
+
+.currentGame {
+
 }
 
 .navbar-right li {
