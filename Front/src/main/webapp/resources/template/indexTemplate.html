@@ -21,6 +21,43 @@
         <div class="content">
             <div class="content1">
                 <div class="content">
+
+                    <div class="statistic">
+                        <div class="row">
+                            <div class="info_wind">
+                                <p>инфо окно с кратким описанием сайта</p>
+
+                                <p>Участвующие вносят скины, по достижении определенного максимального количества
+                                    случайным образом выбирается победитель, который получит все скины. Шанс выигрыша
+                                    зависит от стоимости внесенных скинов.</p>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="info_col">
+                                <div class="col-lg-3">
+                                    <div class="info_name">Cегодня игр</div>
+                                    <div class="info_number">0</div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="info_name">Розыграных вещей сегодня</div>
+                                    <div class="info_number">0</div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="info_name">Игроков сегодня</div>
+                                    <div class="info_number">0</div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="info_name">Максимальный выйгрыш</div>
+                                    <div class="info_number">0</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="currentGame row">
                         <div class="col-lg-8 indent">
                             <div class="row text-center vertical-line">
@@ -76,7 +113,7 @@
 <div class="row">
     <div class="col-lg-2">
 
-        <div ><!--ng-show="game.lastWinnerNickName"-->
+        <div><!--ng-show="game.lastWinnerNickName"-->
             <h1>Последний победитель</h1>
 
             <div class="thumbnail line user">
@@ -92,47 +129,17 @@
     <div class="col-lg-9">
         <div ng-repeat="player in game.players">
             <div ng-repeat="weapon in player.weaponList">
-                <img  class="line" ng-src="{{'http://cdn.steamcommunity.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFAuhqSaKWtEu43mxtbbk6b1a77Twm4Iu8Yl3bCU9Imii1Xt80M5MmD7JZjVLFH-6VnQJQ'}}">
+                <img class="line"
+                     ng-src="{{'http://cdn.steamcommunity.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFAuhqSaKWtEu43mxtbbk6b1a77Twm4Iu8Yl3bCU9Imii1Xt80M5MmD7JZjVLFH-6VnQJQ'}}">
+
                 <h1 class="line">{{player.nickName}}</h1>
-                <h1  class="line">внес</h1>
-                <h1  class="line">{{weapon.weaponName}}</h1>
-                <h1  class="line">{{application.language == 'ru' ? weapon.price.rub: weapon.price.usd}} {{application.text.valute}}</h1>
-        <div class="content">
-            <div class="statistic">
-                <div class="row">
-                    <div class="info_wind">
-                        <p>инфо окно с кратким описанием сайта</p>
-                        <p>Участвующие вносят скины, по достижении определенного максимального количества случайным образом выбирается победитель, который получит все скины. Шанс выигрыша зависит от стоимости внесенных скинов.</p>
-                    </div>
 
-                </div>
-                <div class="row">
-                    <div class="info_col">
-                        <div class="col-lg-3">
-                            <div class="info_name">Cегодня игр</div>
-                            <div class="info_number">0</div>
-                        </div>
+                <h1 class="line">внес</h1>
 
-                        <div class="col-lg-3">
-                            <div class="info_name">Розыграных вещей сегодня</div>
-                            <div class="info_number">0</div>
-                        </div>
+                <h1 class="line">{{weapon.weaponName}}</h1>
 
-                        <div class="col-lg-3">
-                            <div class="info_name">Игроков сегодня</div>
-                            <div class="info_number">0</div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="info_name">Максимальный выйгрыш</div>
-                            <div class="info_number">0</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="currentGame">
-                Игра № {{game.id}}
-                Банк {{application.language == 'ru' ? game.total.rub : game.total.usd}} {{application.text.valute}}
+                <h1 class="line">{{application.language == 'ru' ? weapon.price.rub: weapon.price.usd}}
+                    {{application.text.valute}}</h1>
             </div>
         </div>
     </div>
