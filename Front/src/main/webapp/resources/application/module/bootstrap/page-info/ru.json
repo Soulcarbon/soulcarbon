@@ -13,6 +13,7 @@
         "bootstrap_rate" : "ставка, %",
         "bootstrap_vk_group" : "группа в контакте",
         "bootstrap_countPlayersForStartGame" : "количество игроков для начала игры",
-        "bootstrap_setting_before_game_over" : "количество секунд до конца игры"
+        "bootstrap_setting_before_game_over" : "количество секунд до конца игры",
+        "bootstrap_link_trade_offer" : "ссылка на трейд"
     }
 }
