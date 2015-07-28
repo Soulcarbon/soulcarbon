@@ -24,7 +24,7 @@
 
         <div class="logo">
             <h1>
-                <img class="logo2" src="/resources/img/logo3.png">
+                <img class="logo2" src="/resources/img/logo4.png">
             </h1>
         </div>
 

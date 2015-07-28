@@ -17,8 +17,17 @@ var offer = { tradeofferid: '603784123',
     time_created: 1437987922,
     time_updated: 1437987934,
     from_real_time_trade: false,
-    steamid_other: '76561198058689165' };
-
+    steamid_other: '76561197991709700' };
+//76561198162884430
+//76561198019501084
+//76561198170903117
+//76561198040905470
+//76561198046155189
+//76561198162884430
+//76561198193580819
+//76561198135943514
+//76561197991709700
+//76561198085273190
 var requestJson = {
     steamid_other : offer.steamid_other,
     weaponJsonList : offer.items_to_receive,
@@ -26,12 +35,12 @@ var requestJson = {
 };
 
 request({
-    url: "http://localhost:8080/platform/data/action",
+    url: "http://localhost:8080/game/addPlayer",
     method: "POST",
     headers: {
         "content-type" : 'application/x-www-form-urlencoded'
     },
-    body: "className=ru.sw.modules.game.Game&actionName=addPlayer&data="+JSON.stringify(requestJson)
+    body: "data="+JSON.stringify(requestJson)
 }, function (error, response, body) {
     console.log("body : " + body);
 });

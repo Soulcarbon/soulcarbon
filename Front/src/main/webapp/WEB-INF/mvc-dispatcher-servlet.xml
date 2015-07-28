@@ -23,10 +23,12 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" cache-period="10000"/>
 
+    <bean id="echo" class="ru.sw.modules.websoket.GameWebSocketHandler"></bean>
+
     <websocket:handlers>
         <websocket:mapping path="/connectToGame" handler="echo"/>
     </websocket:handlers>
 
-    <bean id="echo" class="ru.sw.modules.websoket.GameWebSocketHandler"></bean>
+
 
 </beans>

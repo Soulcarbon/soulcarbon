@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.sw.modules.settings.SettingsService;
 import ru.sw.modules.userInfo.UserInfoService;
 import ru.sw.platform.core.annotations.Action;
 import ru.sw.platform.core.services.AbstractService;
@@ -29,6 +30,9 @@ public class InitialServiceInfoService extends AbstractService {
     @Autowired
     private InitialServiceInfoRepository initialServiceInfoRepository;
 
+    @Autowired
+    private SettingsService settingsService;
+
     private ObjectMapper objectMapper = new ObjectMapper();
 
     Logger logger = LoggerFactory.getLogger(InitialServiceInfoService.class);
@@ -40,6 +44,7 @@ public class InitialServiceInfoService extends AbstractService {
         services.put(roleService , new InitialServiceInfo("roleService"));
         services.put(userService , new InitialServiceInfo("userService"));
         services.put(userInfoService , new InitialServiceInfo("userInfoService"));
+        services.put(settingsService , new InitialServiceInfo("settingsService"));
 
         for(Map.Entry<BootsrapService<?> , InitialServiceInfo> entry : services.entrySet()) {
             List<InitialServiceInfo> info = initialServiceInfoRepository.

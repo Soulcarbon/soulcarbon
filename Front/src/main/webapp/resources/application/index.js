@@ -22,6 +22,10 @@ model.controller("indexController",function($scope,$http,applicationService,$sta
 
     applicationService.pageInfo($scope);
 
+    applicationService.list($scope,"setting","ru.sw.modules.settings.Settings");
+
+    applicationService.action($scope, "statistic" , "ru.sw.modules.statistics.Statistics" , "statistics" , {})
+
     $scope.changeLanguage = function(language) {
         var str = window.location.hash.split("/").splice(2).join("/");
         if(str) {

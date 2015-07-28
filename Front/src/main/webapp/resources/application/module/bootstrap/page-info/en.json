@@ -7,6 +7,10 @@
     "bootstrap_id_services" : "Service id",
     "bootstrap_service_name" : "Service name",
     "bootstrap_state" : "State",
-    "bootstrap_error_message" : "Error message"
+    "bootstrap_error_message" : "Error message",
+    "bootstrap_site_name" : "site name",
+    "bootstrap_bonus" : "bonus, %",
+    "bootstrap_rate" : "rate, %",
+    "bootstrap_vk_group" : "vk group"
   }
 }

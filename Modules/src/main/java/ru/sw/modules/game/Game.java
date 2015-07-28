@@ -1,5 +1,6 @@
 package ru.sw.modules.game;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.sw.modules.game.player.Player;
 import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.ModuleInfo;
@@ -8,6 +9,7 @@ import ru.sw.platform.core.entity.UserList;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @Entity
@@ -42,6 +44,14 @@ public class Game extends AbstractEntity {
     private String lastWinnerNickName;
 
     private String lastWinnerImageUrl;
+
+    @JsonIgnore
+    @Column(name = "date_of_start_game")
+    private Calendar dateOfStartGame = Calendar.getInstance();
+
+    public Calendar getDateOfStartGame() {
+        return dateOfStartGame;
+    }
 
     public List<Player> getPlayers() {
         return players;

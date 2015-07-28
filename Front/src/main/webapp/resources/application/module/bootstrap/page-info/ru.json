@@ -7,6 +7,10 @@
         "bootstrap_id_services" : "идентификатор сервиса",
         "bootstrap_service_name" : "наименование сервиса",
         "bootstrap_state" : "состояние задачи",
-        "bootstrap_error_message" : "сообщение об ошибке"
+        "bootstrap_error_message" : "сообщение об ошибке",
+        "bootstrap_site_name" : "имя сайта",
+        "bootstrap_bonus" : "бонус, %",
+        "bootstrap_rate" : "ставка, %",
+        "bootstrap_vk_group" : "группа в контакте"
     }
 }

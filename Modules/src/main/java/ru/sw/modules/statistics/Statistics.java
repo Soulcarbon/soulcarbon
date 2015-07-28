@@ -1,5 +1,6 @@
 package ru.sw.modules.statistics;
 
+import ru.sw.modules.game.player.Player;
 import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.ModuleInfo;
 import ru.sw.platform.core.entity.AbstractEntity;
@@ -7,11 +8,12 @@ import ru.sw.platform.core.entity.UserList;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+@ModuleInfo(serviceName = "StatisticsService")
 public class Statistics extends AbstractEntity{
-
-    private Calendar date;
 
     private Integer countGames = 0;
 
@@ -21,20 +23,32 @@ public class Statistics extends AbstractEntity{
 
     private Price maxCash;
 
+    private List<Player> previousWinner = new ArrayList<>();
+
+    private List<Player> topPlayer = new ArrayList<>();
+
+    public List<Player> getPreviousWinner() {
+        return previousWinner;
+    }
+
+    public void setPreviousWinner(List<Player> previousWinner) {
+        this.previousWinner = previousWinner;
+    }
+
+    public List<Player> getTopPlayer() {
+        return topPlayer;
+    }
+
+    public void setTopPlayer(List<Player> topPlayer) {
+        this.topPlayer = topPlayer;
+    }
+
     public Price getMaxCash() {
         return maxCash;
     }
 
     public void setMaxCash(Price maxCash) {
         this.maxCash = maxCash;
-    }
-
-    public Calendar getDate() {
-        return date;
-    }
-
-    public void setDate(Calendar date) {
-        this.date = date;
     }
 
     public Integer getCountGames() {

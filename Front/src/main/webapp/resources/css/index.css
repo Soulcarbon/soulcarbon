@@ -52,7 +52,7 @@ body{
 .header-basic .header-limiter .logo  {
    position: relative;
 
-   width:190px ;
+    width:190px ;
     height: 120px;
     float: left;
     font: normal 28px Cookie, Arial, Helvetica, sans-serif;
@@ -162,18 +162,24 @@ body {
 }
 
 /*Подарок с лево*/
-.social {
-    background: #452869;
-    height: 300px;
-
-}
 .gift {
+    background: #901313;
     padding: 30px;
+}
 
+.gift:hover{
+    background: #900404;
 }
+
 .img_gift {
-    margin: 0 30% 0 20%;
+    /*margin: 0 30% 0 20%;*/
+    width: 70%;
+    margin: 0 auto;
 }
+.social{
+    margin-left: 1%;
+}
+
 .gift p{
     text-align:center;
 }
@@ -188,19 +194,15 @@ body {
     font-weight:bold ;
 }
 .vk{
-
-}
-.vk i{
-    width: 250px;
     background:#000 ;
-    height: 105px;
-    font-size: 50px;
-    text-align:center;
-
-
-}
-.vk i:hover{
+    padding: 20px;
     cursor: pointer;
+    text-align:center;
+    font-size: 50px;
+}
+
+.vk:hover{
+   background: #6383a8;
 }
 
 
@@ -209,8 +211,6 @@ body {
 
 .content{
     background: #999  ;
-    height: 300px;
-
 }
 .content1{
     padding: 30px;
