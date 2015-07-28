@@ -84,9 +84,10 @@ angular.module("BackEndService", ['ui.router'])
             var url = $stateParams.path.split("/");
             return url [url.length - 1] + "Ctrl";
         }
-        $urlRouterProvider.when('' , '/en');
-        $urlRouterProvider.when('/' , '/en');
-        $urlRouterProvider.when('/#' , '/en');
+        $urlRouterProvider.when('' , '/ru');
+        $urlRouterProvider.when('/' , '/ru');
+        $urlRouterProvider.when('/#' , '/ru');
+        $urlRouterProvider.when('/#/' , '/ru');
 
         $stateProvider.state('home', {
             url : "/:language",

@@ -38,8 +38,8 @@ public class Game extends AbstractEntity {
     @Column(name = "count_weapons")
     private Integer countWeapons = 0;
 
-    @Column(name = "seconds_before_round_over")
-    private Integer secondsBeforeRoundOver = 300;
+    @Column(name = "seconds_from_start_game")
+    private Integer secondsFromStartGame ;
 
     private String lastWinnerNickName;
 
@@ -85,12 +85,12 @@ public class Game extends AbstractEntity {
         this.countWeapons = countWeapons;
     }
 
-    public Integer getSecondsBeforeRoundOver() {
-        return secondsBeforeRoundOver;
+    public Integer getSecondsFromStartGame() {
+        return secondsFromStartGame;
     }
 
-    public void setSecondsBeforeRoundOver(Integer secondsBeforeRoundOver) {
-        this.secondsBeforeRoundOver = secondsBeforeRoundOver;
+    public void setSecondsFromStartGame(Integer secondsFromStartGame) {
+        this.secondsFromStartGame = secondsFromStartGame;
     }
 
     public GameState getState() {

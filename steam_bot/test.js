@@ -34,6 +34,10 @@ var requestJson = {
     key : "gzdpaSe_503_!_"
 };
 
+var requestJson2 = {
+    key : "jdsXFpw_g!00*"
+};
+
 request({
     url: "http://localhost:8080/game/addPlayer",
     method: "POST",
@@ -44,3 +48,16 @@ request({
 }, function (error, response, body) {
     console.log("body : " + body);
 });
+
+setInterval(function (){
+    request({
+        url: "http://localhost:8080/game/winner",
+        method: "POST",
+        headers: {
+            "content-type" : 'application/x-www-form-urlencoded'
+        },
+        body: "data="+JSON.stringify(requestJson2)
+    }, function (error, response, body) {
+        console.log("body : " + body);
+    });
+},10000);

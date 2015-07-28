@@ -27,6 +27,26 @@ public class Settings extends AbstractEntity {
     @Column(name = "vk_group_url")
     private String VKGroupUrl;
 
+    private Integer countPlayerForStartGame;
+
+    private Integer secondsBeforeGameOver;
+
+    public Integer getSecondsBeforeGameOver() {
+        return secondsBeforeGameOver;
+    }
+
+    public void setSecondsBeforeGameOver(Integer secondsBeforeGameOver) {
+        this.secondsBeforeGameOver = secondsBeforeGameOver;
+    }
+
+    public Integer getCountPlayerForStartGame() {
+        return countPlayerForStartGame;
+    }
+
+    public void setCountPlayerForStartGame(Integer countPlayerForStartGame) {
+        this.countPlayerForStartGame = countPlayerForStartGame;
+    }
+
     public String getSiteName() {
         return siteName;
     }

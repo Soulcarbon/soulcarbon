@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.sw.modules.game.player.Player;
+import ru.sw.modules.settings.Settings;
+import ru.sw.modules.settings.SettingsRepository;
 import ru.sw.modules.steam.utils.Price;
 import ru.sw.modules.steam.utils.SteamUtil;
 import ru.sw.modules.weapon.Weapon;
 import ru.sw.modules.weapon.WeaponRepository;
 import ru.sw.modules.websoket.GameWebSocketHandler;
+import ru.sw.modules.websoket.Winner;
 
 import java.io.IOException;
 import java.util.*;
@@ -31,6 +34,9 @@ public class GameController {
 
     @Autowired
     private WeaponRepository weaponRepository;
+
+    @Autowired
+    private SettingsRepository settingsRepository;
 
     @RequestMapping(value = "/addPlayer" , method = RequestMethod.POST)
     public @ResponseBody String addPlayer(@RequestParam("data") String jsonData) throws IOException {
@@ -72,7 +78,7 @@ public class GameController {
             player.setTotal(totalCost);
             player.setSteamId(steamId);
 
-
+            Settings settings = settingsRepository.list(Settings.class).get(0);
             synchronized (gameWebSocketHandler.monitor) {
                 gameWebSocketHandler.activeGame.getTotal().addPrice(player.getTotal());
                 Integer tempCountWeapon = gameWebSocketHandler.activeGame.getCountWeapons();
@@ -98,7 +104,9 @@ public class GameController {
                         element.setProbability(element.getTotal().getUsd() / gameWebSocketHandler.activeGame.getTotal().getUsd() * 100);
                     }
                     gameWebSocketHandler.updateSession();
-                    if(gameWebSocketHandler.activeGame.getPlayers().size() == 3) {
+
+                    if(gameWebSocketHandler.activeGame.getPlayers().size() == settings.getCountPlayerForStartGame()) {
+                        System.err.println("Start game");
                         gameWebSocketHandler.startGame();
                     }
 
@@ -109,10 +117,34 @@ public class GameController {
                 player.setProbability(100);
                 gameWebSocketHandler.activeGame.setPlayers(new LinkedList<Player>(Arrays.asList(player)));
                 gameWebSocketHandler.updateSession();
+                if(gameWebSocketHandler.activeGame.getPlayers().size() == settings.getCountPlayerForStartGame()) {
+                    System.err.println("Start game2");
+                    gameWebSocketHandler.startGame();
+                }
                 return "ok";
             }
         }
 
         return "wrong key";
+    }
+
+    @RequestMapping(value = "/winner", method = RequestMethod.POST)
+    public @ResponseBody String getWinner(@RequestParam("data") String jsonData) throws IOException {
+        TypeReference<HashMap<String, Object>> typeRef
+                = new TypeReference<HashMap<String, Object>>() {
+        };
+        ObjectMapper objectMapper = new ObjectMapper();
+        HashMap<String, Object> map = objectMapper.readValue(jsonData, typeRef);
+
+        if(map.get("key").equals("jdsXFpw_g!00*")) {
+
+            if(gameWebSocketHandler.winners.isEmpty()) {
+                return "is Empty";
+            }
+            Winner winner = gameWebSocketHandler.winners.remove(0);
+            return objectMapper.writeValueAsString(winner);
+        }
+
+        return "ok";
     }
 }

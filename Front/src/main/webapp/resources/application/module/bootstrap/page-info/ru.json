@@ -11,6 +11,8 @@
         "bootstrap_site_name" : "имя сайта",
         "bootstrap_bonus" : "бонус, %",
         "bootstrap_rate" : "ставка, %",
-        "bootstrap_vk_group" : "группа в контакте"
+        "bootstrap_vk_group" : "группа в контакте",
+        "bootstrap_countPlayersForStartGame" : "количество игроков для начала игры",
+        "bootstrap_setting_before_game_over" : "количество секунд до конца игры"
     }
 }

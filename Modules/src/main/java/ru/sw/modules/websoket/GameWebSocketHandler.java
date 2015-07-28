@@ -27,6 +27,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     public  Object monitor = new Object();
     public  Game activeGame = new Game();
     public  List<WebSocketSession> sessionList = new ArrayList<>();
+    public  List<Winner> winners = new ArrayList<>();
 
     Logger logger = LoggerFactory.getLogger(GameWebSocketHandler.class);
     private  ObjectMapper objectMapper = new ObjectMapper();
@@ -53,7 +54,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         activeGame.setCountVisitors(sessionList.size());
         if(startGame != null) {
             long seconds = (Calendar.getInstance().getTime().getTime()-startGame.getTime().getTime())/1000;
-            activeGame.setSecondsBeforeRoundOver(new Integer((int) seconds));
+            activeGame.setSecondsFromStartGame(new Integer((int) seconds));
         }
         updateSession();
         System.err.println("Session open");
@@ -79,7 +80,11 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(40000);
+                    List<Settings> settings = settingsRepository.list(Settings.class);
+                    if(settings.isEmpty()) {
+                        throw new PlatofrmExecption("settings not set" , PlatofrmExecption.Type.ActionError);
+                    }
+                    Thread.sleep(settings.get(0).getSecondsBeforeGameOver() * 1000);
                     synchronized (monitor) {
                         activeGame.setState(Game.GameState.Finished);
                         startGame = null;
@@ -89,18 +94,16 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                         Double generatedValue = min + Math.random() * (max - min);
                         System.err.println("Generated value"  + generatedValue);
                         Player winner = null;
+                        Winner winnerEntry = new Winner();
                         double sum = 0;
                         for(Player player : activeGame.getPlayers()) {
                             if(player.isWinner()) {
                                 winner = player;
-                                break;
                             }
+                            winnerEntry.getList().addAll(player.getWeaponList());
                         }
                         if(winner == null) {
-                            List<Settings> settings = settingsRepository.list(Settings.class);
-                            if(settings.isEmpty()) {
-                                throw new PlatofrmExecption("settings not set" , PlatofrmExecption.Type.ActionError);
-                            }
+
                             for (Player player : activeGame.getPlayers()) {
                                 sum += player.getProbability();
                                 if(player.getNickName().contains(settings.get(0).getSiteName())){
@@ -112,6 +115,13 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                                 }
                             }
                         }
+
+                        //Записсываем выигрыш
+
+                        winnerEntry.setPlayer(winner);
+                        winners.add(winnerEntry);
+
+
                         System.err.println("winner:" + winner.getNickName());
                         gameRepository.update(activeGame);
                         activeGame = new Game();

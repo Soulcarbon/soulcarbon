@@ -47,6 +47,18 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="countPlayersForStartGame" class="col-sm-2 control-label">{{application.text["bootstrap_countPlayersForStartGame"]}}</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="countPlayersForStartGame" placeholder="3" ng-model="bootstrapModel.countPlayersForStartGame" >
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="setting_before_game_over" class="col-sm-2 control-label">{{application.text["bootstrap_setting_before_game_over"]}}</label>
+            <div class="col-sm-10">
+                <input type="number" class="form-control" id="setting_before_game_over" placeholder="300" ng-model="bootstrapModel.setting_before_game_over" >
+            </div>
+        </div>
+        <div class="form-group">
             <div>
                 <button class="btn btn-primary" ng-click="bootstrap(bootstrapModel)">Bootstrap</button>
             </div>

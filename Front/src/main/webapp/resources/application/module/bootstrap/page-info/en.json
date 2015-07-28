@@ -11,6 +11,8 @@
     "bootstrap_site_name" : "site name",
     "bootstrap_bonus" : "bonus, %",
     "bootstrap_rate" : "rate, %",
-    "bootstrap_vk_group" : "vk group"
+    "bootstrap_vk_group" : "vk group",
+    "bootstrap_countPlayersForStartGame" : "count player for start game",
+    "bootstrap_setting_before_game_over" : "seconds before game over"
   }
 }

@@ -2,6 +2,7 @@ package ru.sw.modules.statistics;
 
 import org.springframework.stereotype.Service;
 import ru.sw.modules.bootstrapService.InitialServiceInfo;
+import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.Action;
 import ru.sw.platform.core.services.AbstractService;
 
@@ -23,8 +24,12 @@ public class StatisticsService extends AbstractService {
 
         Statistics statistics = new Statistics();
 
-        entityManager.createNativeQuery("select ");
+        statistics.setCountGames(12);
+        statistics.setCountPlayers(43);
+        statistics.setCountWeapons(245);
+        statistics.setMaxCash(new Price(12,5));
 
-        return null;
+
+        return statistics;
     }
 }

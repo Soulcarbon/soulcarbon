@@ -163,12 +163,12 @@ body {
 
 /*Подарок с лево*/
 .gift {
-    background: #901313;
+    background: #351A33;
     padding: 30px;
 }
 
 .gift:hover{
-    background: #900404;
+    background: #912387;
 }
 
 .img_gift {

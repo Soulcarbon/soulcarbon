@@ -42,6 +42,18 @@ public class SettingsService extends AbstractService implements BootsrapService<
                 settings.setVKGroupUrl("/#");
             }
 
+            if(map.containsKey("countPlayersForStartGame")) {
+                settings.setCountPlayerForStartGame((Integer) map.get("countPlayersForStartGame"));
+            } else {
+                settings.setCountPlayerForStartGame(3);
+            }
+
+            if(map.containsKey("setting_before_game_over")) {
+                settings.setSecondsBeforeGameOver((Integer) map.get("setting_before_game_over"));
+            } else {
+                settings.setSecondsBeforeGameOver(300);
+            }
+
             settingsRepository.create(settings);
         }
     }
