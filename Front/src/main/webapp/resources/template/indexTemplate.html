@@ -10,6 +10,7 @@
                             class="span2">БОНУС</span> к выигрышу <span class="span2">{{setting[0].bonus}}%</span></p>
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="vk">
                     <i class="fa fa-vk"><p>Мы в ВК</p></i>
@@ -22,7 +23,14 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-9">
+        <div class="content">
+           <div class="currentGame">
+               Игра № {{game.id}}
+               Банк {{application.language == 'ru' ? game.total.rub : game.total.usd}} {{application.text.valute}}
+           </div>
+        </div>
+    </div>
     <div class="row">
         {{game}}
     </div>
-

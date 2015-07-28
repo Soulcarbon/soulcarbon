@@ -40,39 +40,19 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav nav-logo">
-                    <li class="active"><a href="#">{{application.text.History}}</a></li>
+                    <li><a href="#">{{application.text.History}}</a></li>
                     <li><a href="#">{{application.text.TopWinners}}</a></li>
                     <li><a href="#">{{application.text.Rules}}</a></li>
                     <li><a href="#">{{application.text.Contact}}</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right nav-logo">
-                    <li ng-class="pageInfo.language == 'en' ? 'selected' : ''" ><a ng-click="changeLanguage('en')">en</a></li>
-                    <li ng-class="pageInfo.language == 'ru' ? 'selected' : ''" ><a ng-click="changeLanguage('ru')">ru</a></li>
+                    <li ng-class="application.language == 'en' ? 'active' : ''" ><a ng-click="changeLanguage('en')">en</a></li>
+                    <li ng-class="application.language == 'ru' ? 'active' : ''"><a ng-click="changeLanguage('ru')">ru</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <%--<div class="header-limiter">--%>
-
-        <%--<div class="logo">--%>
-            <%--<h1>--%>
-                <%--<img class="logo2" src="/resources/img/logo4.png">--%>
-            <%--</h1>--%>
-        <%--</div>--%>
-
-        <%--<nav>--%>
-
-            <%--<a href="#">{{application.text.History}}</a>--%>
-            <%--<a href="#">{{application.text.TopWinners}}</a>--%>
-
-            <%--<a href="#">{{application.text.Rules}}</a>--%>
-            <%--<a href="#">{{application.text.Contact}}</a>--%>
-
-            <%--<div ng-class="pageInfo.language == 'en' ? 'selected' : ''" ng-click="changeLanguage('en')">en</div>--%>
-            <%--<div ng-class="pageInfo.language == 'ru' ? 'selected' : ''" ng-click="changeLanguage('ru')">ru</div>--%>
-        <%--</nav>--%>
-    <%--</div>--%>
 
 </header>
 
