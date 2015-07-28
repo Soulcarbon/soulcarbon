@@ -249,4 +249,39 @@ body {
 }
 
 
+.line{
+    display: inline-block;
+    margin:0 15px;
+}
 
+.indent{
+    margin-left:20px;
+}
+.vertical-line{
+    margin-bottom:20px;
+    line-height: 35px;
+}
+.modal{
+    color:#000000;
+}
+.timer{
+    height: 150px;
+    font-size: 100px;
+
+}
+
+.users{
+    width:100%;
+    overflow: hidden;
+    overflow-x: scroll;
+    white-space:nowrap;
+}
+
+.user{
+    background-color: inherit;
+    border: 0;
+}
+
+.user.thumbnail .caption{
+    color: white;
+}
