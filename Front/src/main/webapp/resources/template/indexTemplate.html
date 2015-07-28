@@ -97,6 +97,42 @@
                 <h1  class="line">внес</h1>
                 <h1  class="line">{{weapon.weaponName}}</h1>
                 <h1  class="line">{{application.language == 'ru' ? weapon.price.rub: weapon.price.usd}} {{application.text.valute}}</h1>
+        <div class="content">
+            <div class="statistic">
+                <div class="row">
+                    <div class="info_wind">
+                        <p>инфо окно с кратким описанием сайта</p>
+                        <p>Участвующие вносят скины, по достижении определенного максимального количества случайным образом выбирается победитель, который получит все скины. Шанс выигрыша зависит от стоимости внесенных скинов.</p>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="info_col">
+                        <div class="col-lg-3">
+                            <div class="info_name">Cегодня игр</div>
+                            <div class="info_number">0</div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="info_name">Розыграных вещей сегодня</div>
+                            <div class="info_number">0</div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="info_name">Игроков сегодня</div>
+                            <div class="info_number">0</div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="info_name">Максимальный выйгрыш</div>
+                            <div class="info_number">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="currentGame">
+                Игра № {{game.id}}
+                Банк {{application.language == 'ru' ? game.total.rub : game.total.usd}} {{application.text.valute}}
             </div>
         </div>
     </div>
