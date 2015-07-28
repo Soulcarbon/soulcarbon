@@ -239,6 +239,33 @@ body {
 
 .content{
 }
+/*информ окно с колонками*/
+
+.statistic{
+    background: #000;
+    padding:10px 40px 10px 40px;
+    text-align: center;
+
+}
+
+.info_wind{
+
+}
+.info_col{
+
+}
+.info_col div{
+    background: #121212;
+
+}
+.info_name{
+    color: #C60FB5;
+}
+.info_number{
+    font-size: 30px;
+    color: lime;
+}
+
 
 .currentGame {
 
