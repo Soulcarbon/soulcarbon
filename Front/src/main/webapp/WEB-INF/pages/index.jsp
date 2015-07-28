@@ -18,28 +18,59 @@
     <link rel="stylesheet" href="/resources/bower_components/fontawesome/css/font-awesome.min.css">
 </head>
 <body>
+
 <header class="header-basic">
+    <nav class="navbar-inverse">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                    <div class="navbar-brand logo">
+                        <img class="logo2" src="/resources/img/logo4.png">
+                    </div>
+            </div>
 
-    <div class="header-limiter">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav nav-logo">
+                    <li class="active"><a href="#">{{application.text.History}}</a></li>
+                    <li><a href="#">{{application.text.TopWinners}}</a></li>
+                    <li><a href="#">{{application.text.Rules}}</a></li>
+                    <li><a href="#">{{application.text.Contact}}</a></li>
+                </ul>
 
-        <div class="logo">
-            <h1>
-                <img class="logo2" src="/resources/img/logo4.png">
-            </h1>
-        </div>
+                <ul class="nav navbar-nav navbar-right nav-logo">
+                    <li ng-class="pageInfo.language == 'en' ? 'selected' : ''" ><a ng-click="changeLanguage('en')">en</a></li>
+                    <li ng-class="pageInfo.language == 'ru' ? 'selected' : ''" ><a ng-click="changeLanguage('ru')">ru</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+    <%--<div class="header-limiter">--%>
 
-        <nav>
+        <%--<div class="logo">--%>
+            <%--<h1>--%>
+                <%--<img class="logo2" src="/resources/img/logo4.png">--%>
+            <%--</h1>--%>
+        <%--</div>--%>
 
-            <a href="#">{{application.text.History}}</a>
-            <a href="#">{{application.text.TopWinners}}</a>
+        <%--<nav>--%>
 
-            <a href="#">{{application.text.Rules}}</a>
-            <a href="#">{{application.text.Contact}}</a>
+            <%--<a href="#">{{application.text.History}}</a>--%>
+            <%--<a href="#">{{application.text.TopWinners}}</a>--%>
 
-            <div ng-class="pageInfo.language == 'en' ? 'selected' : ''" ng-click="changeLanguage('en')">en</div>
-            <div ng-class="pageInfo.language == 'ru' ? 'selected' : ''" ng-click="changeLanguage('ru')">ru</div>
-        </nav>
-    </div>
+            <%--<a href="#">{{application.text.Rules}}</a>--%>
+            <%--<a href="#">{{application.text.Contact}}</a>--%>
+
+            <%--<div ng-class="pageInfo.language == 'en' ? 'selected' : ''" ng-click="changeLanguage('en')">en</div>--%>
+            <%--<div ng-class="pageInfo.language == 'ru' ? 'selected' : ''" ng-click="changeLanguage('ru')">ru</div>--%>
+        <%--</nav>--%>
+    <%--</div>--%>
 
 </header>
 

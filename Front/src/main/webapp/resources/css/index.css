@@ -21,27 +21,28 @@ body{
 }
 /*хидер*/
 .header-basic {
-    background-color: #292c2f;
     box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
-    padding: 20px 40px;
     height: 80px;
     box-sizing: border-box;
 }
 
 .header-basic .header-limiter {
-    max-width: 1200px;
     height: 90px;
     text-align: center;
-    margin: 0 auto;
 }
 
 /* Logo */
+.nav-logo{
+    margin-top:11px;
+    margin-bottom:11px;
+}
+.logo {
+    padding: 5px 15px;
+}
+
 .logo .logo2{
-    position: absolute;
     width: 180px;
     height: 110px;
-    margin-top: -55px;
-    margin-left: -100px;
 
 }
 .header-basic .header-limiter h1{
@@ -126,6 +127,14 @@ body{
 /* Making the header responsive */
 
 @media all and (max-width: 600px) {
+    .logo .logo2{
+        width: 70px;
+        height: 45px;
+    }
+
+    .logo{
+        padding: 2px 15px;
+    }
 
     .header-basic {
         padding: 20px 0;
@@ -159,6 +168,7 @@ body {
 }
 .wrapper{
     clear: both;
+    padding: 50px 40px 20px;
 }
 
 /*Подарок с лево*/
