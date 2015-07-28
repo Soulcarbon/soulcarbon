@@ -226,7 +226,9 @@ body {
     padding: 30px;
 }
 
-
+.navbar-right li {
+    cursor: pointer;
+}
 
 
 
