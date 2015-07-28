@@ -13,6 +13,7 @@
     "bootstrap_rate" : "rate, %",
     "bootstrap_vk_group" : "vk group",
     "bootstrap_countPlayersForStartGame" : "count player for start game",
-    "bootstrap_setting_before_game_over" : "seconds before game over"
+    "bootstrap_setting_before_game_over" : "seconds before game over",
+    "bootstrap_link_trade_offer" : "trade link"
   }
 }

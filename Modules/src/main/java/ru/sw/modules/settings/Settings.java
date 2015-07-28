@@ -27,6 +27,9 @@ public class Settings extends AbstractEntity {
     @Column(name = "vk_group_url")
     private String VKGroupUrl;
 
+    @Column(name = "link_trade_offer")
+    private String linkTradeOffer;
+
     private Integer countPlayerForStartGame;
 
     private Integer secondsBeforeGameOver;
@@ -46,6 +49,7 @@ public class Settings extends AbstractEntity {
     public void setCountPlayerForStartGame(Integer countPlayerForStartGame) {
         this.countPlayerForStartGame = countPlayerForStartGame;
     }
+
 
     public String getSiteName() {
         return siteName;
@@ -88,5 +92,13 @@ public class Settings extends AbstractEntity {
         userList.setRoles(Arrays.asList(role));
 
         return userList;
+    }
+
+    public String getLinkTradeOffer() {
+        return linkTradeOffer;
+    }
+
+    public void setLinkTradeOffer(String linkTradeOffer) {
+        this.linkTradeOffer = linkTradeOffer;
     }
 }

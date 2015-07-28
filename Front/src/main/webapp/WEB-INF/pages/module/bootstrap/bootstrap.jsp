@@ -29,6 +29,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="link_trade_offer" class="col-sm-2 control-label">{{application.text["bootstrap_link_trade_offer"]}}</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="link_trade_offer" placeholder=" https://steamcommunity.com/tradeoffer/new/?partner=126557548&token=PrPPNMhP" ng-model="bootstrapModel.link_trade_offer" >
+            </div>
+        </div>
+        <div class="form-group">
             <label for="bonus" class="col-sm-2 control-label">{{application.text["bootstrap_bonus"]}}</label>
             <div class="col-sm-10">
                 <input type="number" class="form-control" id="bonus" placeholder="5" ng-model="bootstrapModel.bonus" >

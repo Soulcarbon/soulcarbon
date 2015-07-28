@@ -54,6 +54,12 @@ public class SettingsService extends AbstractService implements BootsrapService<
                 settings.setSecondsBeforeGameOver(300);
             }
 
+            if(map.containsKey("link_trade_offer")) {
+                settings.setLinkTradeOffer((String) map.get("link_trade_offer"));
+            } else {
+                settings.setLinkTradeOffer("http://");
+            }
+
             settingsRepository.create(settings);
         }
     }
