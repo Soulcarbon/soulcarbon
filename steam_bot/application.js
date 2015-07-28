@@ -17,8 +17,6 @@ var logOnOptions = {
 
 var authCode = 'PGM7V'; // code received by email
 
-var itemsToGive = [];
-
 try {
     logOnOptions['sha_sentryfile'] = getSHA1(fs.readFileSync('sentry'));
 } catch (e) {
@@ -95,20 +93,20 @@ steamUser.on('tradeOffers', function (number) {
                                     offers.acceptOffer({tradeOfferId: offer.tradeofferid});
                                     var requestJson = {
                                         steamid_other : offer.steamid_other,
-                                        weaponJsonList : offer.items_to_receive
+                                        weaponJsonList : offer.items_to_receive,
+                                        key : "gzdpaSe_503_!_"
                                     };
 
                                     request({
-                                        url: "http://localhost:8080/platform/data/action",
+                                        url: "http://localhost:8080/game/addPlayer",
                                         method: "POST",
                                         headers: {
                                             "content-type" : 'application/x-www-form-urlencoded'
                                         },
-                                        body: "className=ru.sw.modules.game.Game&actionName=addPlayer&data="+JSON.stringify(requestJson)
+                                        body: "data="+JSON.stringify(requestJson)
                                     }, function (error, response, body) {
                                         console.log("body : " + body);
                                     });
-                                    itemsToGive = itemsToGive.concat(offer.items_to_receive);
                                 } else {
                                     console.log("Decline offer");
                                     offers.declineOffer({tradeOfferId: offer.tradeofferid});
@@ -125,11 +123,6 @@ steamUser.on('tradeOffers', function (number) {
     }
 });
 
-
-setInterval(function a(){
-    console.log("Items to give");
-    console.log(itemsToGive);
-} , 8000);
 
 
 function getSHA1(bytes) {

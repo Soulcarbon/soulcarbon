@@ -63,7 +63,7 @@
                             <div class="row text-center vertical-line">
                                 <h2 class="line">Игра № {{game.id}}</h2>
 
-                                <h2 class="line">Банк {{application.language == 'ru' ? game.total.rub : game.total.usd}}
+                                <h2 class="line">Банк {{application.language == 'ru' ? game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
                                     {{application.text.valute}}</h2>
 
                                 <h2 class="line">Внесено предметов {{game.countWeapons}}</h2>
@@ -78,7 +78,7 @@
                                         <div class="caption text-center">
                                             <h3>{{player.nickName}}</h3>
 
-                                            <p>{{player.probability}} %</p>
+                                            <p>{{player.probability.toFixed(3)}} <span class="plus-gift" ng-show="player.nickName.indexOf(setting[0].siteName) != -1">+5</span> %</p>
                                         </div>
                                     </div>
                                 </div>
@@ -86,12 +86,12 @@
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <h1 ng-show="game.players.length < setting[0].countPlayerForStartGame">
+                            <h1 ng-show="game.players.length < setting[0].countPlayerForStartGame" class="text-center">
                                 {{game.players.length}} из {{setting[0].countPlayerForStartGame}}</h1>
 
                             <h1 class="text-center">До начала розыгрыша</h1>
 
-                            <div class="timer text-center">300с</div>
+                            <div class="timer text-center">{{setting[0].secondsBeforeGameOver - counter > 0 ? setting[0].secondsBeforeGameOver - counter : 0}}с</div>
 
                             <div class="text-center">
                                 <button class="btn btn-danger btn-lg line" data-toggle="modal" data-target="#tread">
@@ -117,10 +117,10 @@
             <h1>Последний победитель</h1>
 
             <div class="thumbnail line user">
-                <img ng-src="{{'http://cdn.steamcommunity.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFAuhqSaKWtEu43mxtbbk6b1a77Twm4Iu8Yl3bCU9Imii1Xt80M5MmD7JZjVLFH-6VnQJQ'}}">
+                <img ng-src="{{game.lastWinnerImageUrl}}">
 
                 <div class="caption text-center">
-                    <h3>nnnn</h3>
+                    <h3>{{game.lastWinnerNickName}}</h3>
                 </div>
             </div>
         </div>
@@ -129,21 +129,33 @@
     <div class="col-lg-9">
         <div ng-repeat="player in game.players">
             <div ng-repeat="weapon in player.weaponList">
-                <img class="line"
-                     ng-src="{{'http://cdn.steamcommunity.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXU5A1PIYQNqhpOSV-fRPasw8rsUFJ5KBFZv668FFAuhqSaKWtEu43mxtbbk6b1a77Twm4Iu8Yl3bCU9Imii1Xt80M5MmD7JZjVLFH-6VnQJQ'}}">
+                <img class="line weapon-img"
+                     ng-src="{{weapon.imageUrl}}">
 
-                <h1 class="line">{{player.nickName}}</h1>
+                <h1 class="line weapon-text">{{player.nickName}}</h1>
 
-                <h1 class="line">внес</h1>
+                <h1 class="line weapon-text">внес</h1>
 
-                <h1 class="line">{{weapon.weaponName}}</h1>
+                <h1 class="line weapon-text">{{weapon.weaponName}}</h1>
 
-                <h1 class="line">{{application.language == 'ru' ? weapon.price.rub: weapon.price.usd}}
+                <h1 class="line weapon-text">{{application.language == 'ru' ? weapon.price.rub.toFixed(2): weapon.price.usd.toFixed(2)}}
                     {{application.text.valute}}</h1>
             </div>
         </div>
     </div>
 </div>
-<div class="row">
-    {{game}}
+
+<div class="modal fade" id="tread" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Ссылка на обмен</h4>
+            </div>
+            <div class="modal-body">
+                <p><a href="{{setting[0].linkTradeOffer}}" target="_blank">{{setting[0].linkTradeOffer}}</a></p>
+                <p class="bg-danger">Внимание убедитесь,что у вас открыт интерфейс в steam</p>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>

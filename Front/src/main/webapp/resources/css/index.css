@@ -312,3 +312,16 @@ body {
 .user.thumbnail .caption{
     color: white;
 }
+
+.plus-gift {
+    color: lime;
+}
+
+.weapon-img {
+    width: 240px;
+    height: 190px;
+}
+
+.weapon-text {
+    font-size: 26px;
+}

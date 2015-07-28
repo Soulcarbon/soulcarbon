@@ -53,7 +53,7 @@ public class GameController {
             List<Weapon> weapon_list = new ArrayList<>();
             Price totalCost = new Price();
             for (int i = 0; i < weaponJsonList.size(); i++) {
-                LinkedHashMap<String,Object> weaponJson = weaponJsonList.get(0);
+                LinkedHashMap<String,Object> weaponJson = weaponJsonList.get(i);
                 String classId = (String) weaponJson.get("classid");
                 Integer amount = Integer.parseInt((String) weaponJson.get("amount"));
                 Weapon weapon = weaponRepository.getSingleEntityByFieldAndValue(Weapon.class, "classId", classId);

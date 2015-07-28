@@ -34,17 +34,17 @@ public class StatisticsService extends AbstractService {
         Calendar nextDay = Calendar.getInstance();
         nextDay.add(Calendar.DATE, 1);
         String formatted2 = format1.format(nextDay.getTime());
-        List l = entityManager.createNativeQuery("select count_players , count_weapons,  from game WHERE date_of_start_game >= '" + formatted + "'" +
-                "AND date_of_start_game < '"+formatted2+"'").getResultList();
-
-
-
-        statistics.setCountGames(l.size());
-
-        for(Object object : l) {
-            Object [] objects = (Object[]) object;
-
-        }
+//        List l = entityManager.createNativeQuery("select count_players , count_weapons,  from game WHERE date_of_start_game >= '" + formatted + "'" +
+//                "AND date_of_start_game < '"+formatted2+"'").getResultList();
+//
+//
+//
+//        statistics.setCountGames(l.size());
+//
+//        for(Object object : l) {
+//            Object [] objects = (Object[]) object;
+//
+//        }
         statistics.setCountPlayers(43);
         statistics.setCountWeapons(245);
         statistics.setMaxCash(new Price(12,5));
