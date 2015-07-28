@@ -29,10 +29,8 @@ body{
 }
 
 .header-basic .header-limiter {
-    max-width: 1200px;
     height: 90px;
     text-align: center;
-    margin: 0 auto;
 }
 
 /* Logo */
