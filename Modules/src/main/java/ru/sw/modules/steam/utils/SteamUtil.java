@@ -29,7 +29,7 @@ public class SteamUtil {
                 Weapon weapon = new Weapon();
                 weapon.setClassId(classId);
                 String name = result.getJSONObject(classId).getString("market_name");
-                String imageUrl = "http://cdn.steamcommunity.com/economy/image/" + result.getJSONObject(classId).getString("market_name");
+                String imageUrl = "http://cdn.steamcommunity.com/economy/image/" + result.getJSONObject(classId).getString("icon_url");
 
                 String urlName = URIUtil.encodeQuery(name);
                 jsonObject = Utils.readJsonFromUrl("http://steamcommunity.com/market/priceoverview/?currency=1&appid=" + appid + "&market_hash_name=" + urlName);

@@ -32,6 +32,9 @@ public class Game extends AbstractEntity {
     @Column(name = "count_visitors")
     private Integer countVisitors = 0;
 
+    @Column(name = "count_players")
+    private Integer countPlayers= 0;
+
     @Embedded
     private Price total = new Price();
 
@@ -120,5 +123,13 @@ public class Game extends AbstractEntity {
     @Override
     public UserList getOwners() {
         return null;
+    }
+
+    public Integer getCountPlayers() {
+        return countPlayers;
+    }
+
+    public void setCountPlayers(Integer countPlayers) {
+        this.countPlayers = countPlayers;
     }
 }
