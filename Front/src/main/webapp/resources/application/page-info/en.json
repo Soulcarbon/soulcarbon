@@ -6,7 +6,30 @@
     "TopWinners":"Top Winners",
     "Rules":"Rules",
     "Contact":"Contact",
-    "valute" : "usd"
+    "valute" : "usd",
+    "GiftAddNickName" : "Add in your nick name steam",
+    "angGet" : "and get",
+    "bonus" : "BONUS",
+    "toWin" : "to win",
+    "joinUs" : "Join us VK",
+    "info"  : "information",
+    "infoRight" : "info right",
+    "todayGame" : "Today held games",
+    "todayCountWeapon" : "Raffled count items today",
+    "todayPlayer" : "Count players today",
+    "todayMaxPrize" : "Max prize",
+    "game" : "Game",
+    "madeItems" : "Made items",
+    "bank" : "Bank",
+    "from" : "from",
+    "beforeGame" : "Before start game",
+    "sec" : "s",
+    "joinToGame" : "Join to game",
+    "lastWinner" : "Last winner",
+    "online" : "Online",
+    "contributed" : "contributed" ,
+    "tradeLink" : "Link to trade",
+    "danger" : "Warning Make sure that you open the interface in steam"
 
   }
 }
