@@ -14,7 +14,6 @@
     <link href="/resources/css/index.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700&subset=latin,cyrillic' rel='stylesheet'
           type='text/css'>
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
     <link rel="stylesheet" href="/resources/bower_components/fontawesome/css/font-awesome.min.css">
 </head>
 <body>

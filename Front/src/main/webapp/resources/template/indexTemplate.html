@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="vk">
-                <i class="fa fa-vk"><p>Мы в ВК</p></i>
+               <a href="{{setting[0].vkgroupUrl}}" target="_blank" style="color:#ffffff"> <i class="fa fa-vk"><p>Мы в ВК</p></i> </a>
             </div>
         </div>
     </div>
@@ -37,22 +37,23 @@
                             <div class="info_col">
                                 <div class="col-lg-3">
                                     <div class="info_name">Cегодня игр</div>
-                                    <div class="info_number">0</div>
+                                    <div class="info_number">{{statistic.countGames}}</div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="info_name">Розыграных вещей сегодня</div>
-                                    <div class="info_number">0</div>
+                                    <div class="info_number">{{statistic.countWeapons}}</div>
                                 </div>
 
                                 <div class="col-lg-3">
                                     <div class="info_name">Игроков сегодня</div>
-                                    <div class="info_number">0</div>
+                                    <div class="info_number">{{statistic.countPlayers}}</div>
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <div class="info_name">Максимальный выйгрыш</div>
-                                    <div class="info_number">0</div>
+                                    <div class="info_name">Максимальный выйгрыш {{application.text.valute}}</div>
+                                    <div class="info_number">{{application.language == 'ru' ? statistic.maxCash.rub.toFixed(2) : statistic.maxCash.usd.toFixed(2)}}
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +155,7 @@
             </div>
             <div class="modal-body">
                 <p><a href="{{setting[0].linkTradeOffer}}" target="_blank">{{setting[0].linkTradeOffer}}</a></p>
-                <p class="bg-danger">Внимание убедитесь,что у вас открыт интерфейс в steam</p>
+                <p class="danger">Внимание убедитесь,что у вас открыт интерфейс в steam</p>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

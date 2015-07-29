@@ -325,3 +325,8 @@ body {
 .weapon-text {
     font-size: 26px;
 }
+
+.danger {
+    color: red;
+    font-size: 26px;
+}

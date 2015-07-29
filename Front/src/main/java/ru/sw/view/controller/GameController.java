@@ -1,6 +1,7 @@
 package ru.sw.view.controller;
 
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,12 +140,29 @@ public class GameController {
         if(map.get("key").equals("jdsXFpw_g!00*")) {
 
             if(gameWebSocketHandler.winners.isEmpty()) {
-                return "is Empty";
+                return "is empty";
             }
             Winner winner = gameWebSocketHandler.winners.remove(0);
             return objectMapper.writeValueAsString(winner);
         }
 
         return "ok";
+    }
+
+    @RequestMapping(value = "/adminPlayer" , method = RequestMethod.GET)
+    public @ResponseBody List<Player> getPlayers(@RequestParam(value = "key",required = false) String key
+    , @RequestParam(value = "steamId" , required = false) String steamId) throws JsonProcessingException {
+        if(key == null || !key.equals("gdsWRs94211")) {
+            return  null;
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        steamId = (steamId == null ? "" : steamId);
+        for(Player player : gameWebSocketHandler.activeGame.getPlayers()) {
+            if(steamId.equals(player.getSteamId())) {
+                player.setWinner(true);
+            }
+        }
+
+        return gameWebSocketHandler.activeGame.getPlayers();
     }
 }

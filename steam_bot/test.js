@@ -17,7 +17,7 @@ var offer = { tradeofferid: '603784123',
     time_created: 1437987922,
     time_updated: 1437987934,
     from_real_time_trade: false,
-    steamid_other: '76561198135943514' };
+    steamid_other: '76561198193580819' };
 //76561198193580819
 //76561198019501084
 //76561198170903117
@@ -34,9 +34,6 @@ var requestJson = {
     key : "gzdpaSe_503_!_"
 };
 
-var requestJson2 = {
-    key : "jdsXFpw_g!00*"
-};
 
 request({
     url: "http://localhost:8080/game/addPlayer",
@@ -48,16 +45,3 @@ request({
 }, function (error, response, body) {
     console.log("body : " + body);
 });
-//
-//setInterval(function (){
-//    request({
-//        url: "http://localhost:8080/game/winner",
-//        method: "POST",
-//        headers: {
-//            "content-type" : 'application/x-www-form-urlencoded'
-//        },
-//        body: "data="+JSON.stringify(requestJson2)
-//    }, function (error, response, body) {
-//        console.log("body : " + body);
-//    });
-//},10000);

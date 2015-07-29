@@ -14,6 +14,7 @@ import ru.sw.modules.game.GameRepository;
 import ru.sw.modules.game.player.Player;
 import ru.sw.modules.settings.Settings;
 import ru.sw.modules.settings.SettingsRepository;
+import ru.sw.modules.weapon.Weapon;
 import ru.sw.platform.core.exceptions.PlatofrmExecption;
 
 import java.io.IOException;
@@ -89,8 +90,16 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                         activeGame.setState(Game.GameState.Finished);
                         startGame = null;
 
+                        Integer countBonuses = 0;
+
+                        for(Player player : activeGame.getPlayers()) {
+                            if(player.getNickName().contains(settings.get(0).getSiteName())){
+                                countBonuses++;
+                            }
+                        }
+
                         Integer min = 0;
-                        Integer max = 100;
+                        Integer max = 100 + countBonuses*settings.get(0).getBonus();
                         Double generatedValue = min + Math.random() * (max - min);
                         System.err.println("Generated value"  + generatedValue);
                         Player winner = null;
@@ -119,6 +128,22 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                         //Записсываем выигрыш
 
                         winnerEntry.setPlayer(winner);
+                        List<Integer> indexes = new ArrayList<Integer>();
+                        double totalPercent = 0.0;
+                        int i = 0;
+                        for(Weapon weapon : winnerEntry.getList()){
+
+                            Double tempPercent = weapon.getPrice().getRub() / activeGame.getTotal().getRub() * 100;
+                            if(tempPercent+totalPercent <= settings.get(0).getRate()+3) {
+                                totalPercent += tempPercent;
+                                indexes.add(i);
+                            }
+                            i++;
+                        }
+                        System.err.println("Indexes size : " + indexes.size());
+                        for(int removeIndex : indexes) {
+                            winnerEntry.getList().remove(removeIndex);
+                        }
                         winners.add(winnerEntry);
 
 

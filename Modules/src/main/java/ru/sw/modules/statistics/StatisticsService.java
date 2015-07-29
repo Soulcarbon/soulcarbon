@@ -34,20 +34,37 @@ public class StatisticsService extends AbstractService {
         Calendar nextDay = Calendar.getInstance();
         nextDay.add(Calendar.DATE, 1);
         String formatted2 = format1.format(nextDay.getTime());
-//        List l = entityManager.createNativeQuery("select count_players , count_weapons,  from game WHERE date_of_start_game >= '" + formatted + "'" +
-//                "AND date_of_start_game < '"+formatted2+"'").getResultList();
-//
-//
-//
-//        statistics.setCountGames(l.size());
-//
-//        for(Object object : l) {
-//            Object [] objects = (Object[]) object;
-//
-//        }
-        statistics.setCountPlayers(43);
-        statistics.setCountWeapons(245);
-        statistics.setMaxCash(new Price(12,5));
+        List l = entityManager.createNativeQuery("select count_players , count_weapons, rub, usd  from game WHERE date_of_start_game >= '" + formatted + "'" +
+                "AND date_of_start_game < '"+formatted2+"'").getResultList();
+
+
+
+        statistics.setCountGames(l.size());
+
+        Integer sumPlayer = 0;
+        Integer sumCountWeapon = 0;
+        Double maxRub = 0.0;
+        Double maxUsd = 0.0;
+
+        for(Object object : l) {
+            Object [] objects = (Object[]) object;
+            Integer countPlayer = (Integer) objects[0];
+            Integer countWeapon = (Integer) objects[1];
+            Double rub = (Double) objects[2];
+            Double usd = (Double) objects[3];
+
+            sumPlayer += countPlayer;
+            sumCountWeapon += countWeapon;
+
+
+            if(maxRub < rub) {
+                maxRub = rub;
+                maxUsd = usd;
+            }
+        }
+        statistics.setCountPlayers(sumPlayer);
+        statistics.setCountWeapons(sumCountWeapon);
+        statistics.setMaxCash(new Price(maxRub,maxUsd));
 
 
         return statistics;
