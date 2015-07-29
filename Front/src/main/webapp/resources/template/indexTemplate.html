@@ -5,15 +5,15 @@
                 <div class="img_gift">
                     <img src="/resources/img/gift.png" class="center">
                 </div>
-                <p>Добавь в свой ник steam <span class="span1">{{setting[0].siteName}}</span> и получи <span
-                        class="span2">БОНУС</span> к выигрышу <span class="span2">{{setting[0].bonus}}%</span></p>
+                <p>{{application.text["GiftAddNickName"]}} <span class="span1">{{setting[0].siteName}}</span> {{application.text["angGet"]}} <span
+                        class="span2">{{application.text["bonus"]}}</span> {{application.text["toWin"]}} <span class="span2">{{setting[0].bonus}}%</span></p>
             </div>
         </div>
         <br>
 
         <div class="row">
             <div class="vk">
-               <a href="{{setting[0].vkgroupUrl}}" target="_blank" style="color:#ffffff"> <i class="fa fa-vk"><p>Мы в ВК</p></i> </a>
+               <a href="{{setting[0].vkgroupUrl}}" target="_blank" style="color:#ffffff"> <i class="fa fa-vk"><p>{{application.text["joinUs"]}}</p></i> </a>
             </div>
         </div>
     </div>
@@ -25,33 +25,31 @@
                     <div class="statistic">
                         <div class="row">
                             <div class="info_wind">
-                                <p>инфо окно с кратким описанием сайта</p>
+                                <p>{{application.text["info"]}}</p>
 
-                                <p>Участвующие вносят скины, по достижении определенного максимального количества
-                                    случайным образом выбирается победитель, который получит все скины. Шанс выигрыша
-                                    зависит от стоимости внесенных скинов.</p>
+                                <p align="justify">{{application.text["infoRight"]}}</p>
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="info_col">
                                 <div class="col-lg-3">
-                                    <div class="info_name">Cегодня игр</div>
+                                    <div class="info_name">{{application.text["todayGame"]}}</div>
                                     <div class="info_number">{{statistic.countGames}}</div>
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <div class="info_name">Розыграных вещей сегодня</div>
+                                    <div class="info_name">{{application.text["todayCountWeapon"]}}</div>
                                     <div class="info_number">{{statistic.countWeapons}}</div>
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <div class="info_name">Игроков сегодня</div>
+                                    <div class="info_name">{{application.text["todayPlayer"]}}</div>
                                     <div class="info_number">{{statistic.countPlayers}}</div>
                                 </div>
 
                                 <div class="col-lg-3">
-                                    <div class="info_name">Максимальный выйгрыш {{application.text.valute}}</div>
+                                    <div class="info_name">{{application.text["todayMaxPrize"]}} {{application.text.valute}}</div>
                                     <div class="info_number">{{application.language == 'ru' ? statistic.maxCash.rub.toFixed(2) : statistic.maxCash.usd.toFixed(2)}}
                                         </div>
                                 </div>
@@ -62,12 +60,12 @@
                     <div class="currentGame row">
                         <div class="col-lg-8 indent">
                             <div class="row text-center vertical-line">
-                                <h2 class="line">Игра № {{game.id}}</h2>
+                                <h2 class="line">{{application.text["game"]}} № {{game.id}}</h2>
 
-                                <h2 class="line">Банк {{application.language == 'ru' ? game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
+                                <h2 class="line">{{application.text["bank"]}} {{application.language == 'ru' ? game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
                                     {{application.text.valute}}</h2>
 
-                                <h2 class="line">Внесено предметов {{game.countWeapons}}</h2>
+                                <h2 class="line">{{application.text["madeItems"]}} {{game.countWeapons}}</h2>
 
                             </div>
                             <div class="row users">
@@ -88,15 +86,15 @@
                         </div>
                         <div class="col-lg-3">
                             <h1 ng-show="game.players.length < setting[0].countPlayerForStartGame" class="text-center">
-                                {{game.players.length}} из {{setting[0].countPlayerForStartGame}}</h1>
+                                {{game.players.length}} {{application.text["from"]}} {{setting[0].countPlayerForStartGame}}</h1>
 
-                            <h1 class="text-center">До начала розыгрыша</h1>
+                            <h1 class="text-center">{{application.text["beforeGame"]}}</h1>
 
-                            <div class="timer text-center">{{setting[0].secondsBeforeGameOver - counter > 0 ? setting[0].secondsBeforeGameOver - counter : 0}}с</div>
+                            <div class="timer text-center">{{setting[0].secondsBeforeGameOver - counter > 0 ? setting[0].secondsBeforeGameOver - counter : 0}}{{application.text["sec"]}}</div>
 
                             <div class="text-center">
                                 <button class="btn btn-danger btn-lg line" data-toggle="modal" data-target="#tread">
-                                    Вступить в игру
+                                    {{application.text["joinToGame"]}}
                                 </button>
                             </div>
 
@@ -115,7 +113,7 @@
     <div class="col-lg-2">
 
         <div><!--ng-show="game.lastWinnerNickName"-->
-            <h1>Последний победитель</h1>
+            <h1>{{application.text["lastWinner"]}}</h1>
 
             <div class="thumbnail line user">
                 <img ng-src="{{game.lastWinnerImageUrl}}">
@@ -125,7 +123,7 @@
                 </div>
             </div>
         </div>
-        <h2>Онлайн: {{game.countVisitors}}</h2>
+        <h2>{{application.text["online"]}}: {{game.countVisitors}}</h2>
     </div>
     <div class="col-lg-9">
         <div ng-repeat="player in game.players">
@@ -135,7 +133,7 @@
 
                 <h1 class="line weapon-text">{{player.nickName}}</h1>
 
-                <h1 class="line weapon-text">внес</h1>
+                <h1 class="line weapon-text">{{application.text["contributed"]}}</h1>
 
                 <h1 class="line weapon-text">{{weapon.weaponName}}</h1>
 
@@ -151,11 +149,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Ссылка на обмен</h4>
+                <h4 class="modal-title">{{application.text["tradeLink"]}}</h4>
             </div>
             <div class="modal-body">
                 <p><a href="{{setting[0].linkTradeOffer}}" target="_blank">{{setting[0].linkTradeOffer}}</a></p>
-                <p class="danger">Внимание убедитесь,что у вас открыт интерфейс в steam</p>
+                <p class="danger">{{application.text["danger"]}}</p>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
