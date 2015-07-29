@@ -332,8 +332,10 @@ body {
 }
 /*меню подзагружаемая контакты история топы правила*/
 .contact{
-    background: #000;
+    background: #ffffff;
     padding:50px;
+    color: #000000;
+    border-radius: 10px;
 }
 .contact h1{
     color: magenta;
@@ -341,14 +343,14 @@ body {
 
 }
 .contact p{
-    color: lime;
     font-size: 20px;
 
 }
 .history{
-    background-color: grey;
+    background-color: #ffffff;
     border-radius: 10px;
     padding: 15px;
+    color: #000000;
 }
 .table_history{
     width: 100%;
@@ -387,9 +389,10 @@ body {
 
 
 .top{
-    background-color: grey;
+    background-color: #ffffff;
     border-radius: 10px;
     padding: 15px;
+    color: #000000;
 }
 .table_top{
     width: 100%;
@@ -431,8 +434,10 @@ body {
 }
 
 .rules_text{
-     background: grey;
+     background: #ffffff;
      border-radius: 10px;
+    color: #000000;
+    padding: 10px;
  }
 .rules h1{
     text-align: center;

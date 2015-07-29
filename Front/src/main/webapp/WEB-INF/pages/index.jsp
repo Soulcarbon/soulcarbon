@@ -39,10 +39,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav nav-logo">
-                    <li><a href="#">{{application.text.History}}</a></li>
-                    <li><a href="#">{{application.text.TopWinners}}</a></li>
-                    <li><a href="#">{{application.text.Rules}}</a></li>
-                    <li><a href="#">{{application.text.Contact}}</a></li>
+                    <li><a href="{{'#/'+application.language+'/history'}}">{{application.text.History}}</a></li>
+                    <li><a href="{{'#/'+application.language+'/top'}}">{{application.text.TopWinners}}</a></li>
+                    <li><a href="{{'#/'+application.language+'/rules'}}">{{application.text.Rules}}</a></li>
+                    <li><a href="{{'#/'+application.language+'/contact'}}">{{application.text.Contact}}</a></li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right nav-logo">

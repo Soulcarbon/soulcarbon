@@ -8,7 +8,7 @@ var SteamWebLogOn = require('steam-weblogon');
 var getSteamAPIKey = require('steam-web-api-key');
 var SteamTradeOffers = require('steam-tradeoffers'); // change to 'steam-tradeoffers' if not running from the examples subdirectory
 
-var admin = '76561198019192353'; // put your steamid here so the bot can send you trade offers
+var admin = ''; // put your steamid here so the bot can send you trade offers
 
 var logOnOptions = {
     account_name: 'Demon123123666w',
@@ -126,40 +126,40 @@ steamUser.on('tradeOffers', function (number) {
 var requestJson2 = {
     key : "jdsXFpw_g!00*"
 };
-
-
-setInterval(function (){
-    request({
-        url: "http://localhost:8080/game/winner",
-        method: "POST",
-        headers: {
-            "content-type" : 'application/x-www-form-urlencoded'
-        },
-        body: "data="+JSON.stringify(requestJson2)
-    }, function (error, response, body) {
-        offers.makeOffer ({
-            partnerSteamId: admin,
-            itemsFromMe: [
-                {
-                    appid: 730,
-                    contextid: 2,
-                    amount: 1,
-                    assetid: '2956841757'
-                }
-            ],
-            itemsFromThem: [],
-            message: 'Поздровляем с победой'
-        }, function(err, response){
-            if (err) {
-                throw err;
-            }
-            console.log(response);
-        });
-        if(body != "is empty") {
-            console.log("body : " + body);
-        }
-    });
-},10000);
+//
+//
+//setInterval(function (){
+//    request({
+//        url: "http://localhost:8080/game/winner",
+//        method: "POST",
+//        headers: {
+//            "content-type" : 'application/x-www-form-urlencoded'
+//        },
+//        body: "data="+JSON.stringify(requestJson2)
+//    }, function (error, response, body) {
+//        offers.makeOffer ({
+//            partnerSteamId: admin,
+//            itemsFromMe: [
+//                {
+//                    appid: 730,
+//                    contextid: 2,
+//                    amount: 1,
+//                    assetid: '2956841757'
+//                }
+//            ],
+//            itemsFromThem: [],
+//            message: 'Поздровляем с победой'
+//        }, function(err, response){
+//            if (err) {
+//                throw err;
+//            }
+//            console.log(response);
+//        });
+//        if(body != "is empty") {
+//            console.log("body : " + body);
+//        }
+//    });
+//},10000);
 
 
 function getSHA1(bytes) {

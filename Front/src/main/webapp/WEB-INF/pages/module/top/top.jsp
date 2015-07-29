@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-pot winners
+
 <div class="top_h1">
   <h1>Топ Игроков</h1>
 </div>
 <div class="top">
 
 
-  <table class="table_top table-bordered">
+  <table class="table table-bordered">
     <thead>
     <tr>
       <th>#</th>
