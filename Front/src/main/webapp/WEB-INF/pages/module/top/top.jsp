@@ -1,12 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div class="top_h1">
-  <h1>Топ Игроков</h1>
-</div>
-<div class="top">
+<h1>Топ Игроков</h1>
+
+<div class="card">
 
 
-  <table class="table table-bordered">
+  <table class="table">
     <thead>
     <tr>
       <th>#</th>
