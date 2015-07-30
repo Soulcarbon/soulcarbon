@@ -17,7 +17,7 @@
     <tbody>
       <tr ng-repeat="element in statistic.topPlayer">
         <td>{{element.id}}</td>
-        <td>{{element.lastWinnerNickName}}</td>
+        <td>{{element.winnerNickName}}</td>
         <td>{{element.countWeapons}}</td>
         <td>{{application.language == 'ru' ? element.total.rub.toFixed(2) : element.total.usd.toFixed(2)}}</td>
       </tr>

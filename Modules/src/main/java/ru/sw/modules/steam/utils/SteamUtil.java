@@ -39,8 +39,8 @@ public class SteamUtil {
                     weapon.setImageUrl(imageUrl);
                     String price = jsonObject.get("lowest_price").toString();
                     //Dollar(USD)
-                    if (price.startsWith("&#36;")) {
-                        price = price.replace("&#36;", "");
+                    if (price.startsWith("$")) {
+                        price = price.replace("$", "");
                         Price valuteEntry = Utils.convertDollarToRuble(price);
                         weapon.setPrice(valuteEntry);
                     }

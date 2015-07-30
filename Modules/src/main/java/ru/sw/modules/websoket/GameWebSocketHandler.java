@@ -154,6 +154,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
 
                         System.err.println("winner:" + winner.getNickName());
                         activeGame.setCountPlayers(activeGame.getPlayers().size());
+                        activeGame.setWinnerNickName(winner.getNickName());
                         gameRepository.update(activeGame);
                         activeGame = new Game();
                         activeGame.setLastWinnerNickName(winner.getNickName());

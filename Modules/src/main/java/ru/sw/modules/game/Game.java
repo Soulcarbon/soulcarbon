@@ -29,7 +29,7 @@ public class Game extends AbstractEntity {
     @Transient
     private List<Player> players = new ArrayList<>();
 
-    @Column(name = "count_visitors")
+    @Transient
     private Integer countVisitors = 0;
 
     @Column(name = "count_players")
@@ -51,6 +51,16 @@ public class Game extends AbstractEntity {
     @JsonIgnore
     @Column(name = "date_of_start_game")
     private Calendar dateOfStartGame = Calendar.getInstance();
+
+    private String winnerNickName;
+
+    public String getWinnerNickName() {
+        return winnerNickName;
+    }
+
+    public void setWinnerNickName(String winnerNickName) {
+        this.winnerNickName = winnerNickName;
+    }
 
     public Calendar getDateOfStartGame() {
         return dateOfStartGame;
