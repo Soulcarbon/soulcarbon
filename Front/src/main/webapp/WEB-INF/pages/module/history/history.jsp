@@ -5,24 +5,21 @@
 
 <div class="card">
 
-
     <table class="table ">
         <thead>
         <tr>
             <th>#</th>
-            <th>Идентификатор игры</th>
             <th>Количество разыгранных вещей</th>
-            <th>Сумма</th>
+            <th>Сумма {{application.text.valute}}</th>
             <th>Победитель</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>1.1 gdfghhbcdgtrgf gdytythgf gdrtredg rtertgd</td>
-            <td>1.2</td>
-            <td>1.3</td>
-            <td>1.4</td>
-            <td>1.5</td>
+        <tr ng-repeat="element in statistic.previousWinner">
+            <td>{{element.id}}</td>
+            <td>{{element.countWeapons}}</td>
+            <td>{{application.language == 'ru' ? element.total.rub.toFixed(2) : element.total.usd.toFixed(2)}}</td>
+            <td>{{element.lastWinnerNickName}}</td>
         </tr>
         </tbody>
     </table>

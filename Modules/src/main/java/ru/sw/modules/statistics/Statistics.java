@@ -1,5 +1,6 @@
 package ru.sw.modules.statistics;
 
+import ru.sw.modules.game.Game;
 import ru.sw.modules.game.player.Player;
 import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.ModuleInfo;
@@ -23,23 +24,23 @@ public class Statistics extends AbstractEntity{
 
     private Price maxCash;
 
-    private List<Player> previousWinner = new ArrayList<>();
+    private List<Game> previousWinner = new ArrayList<>();
 
-    private List<Player> topPlayer = new ArrayList<>();
+    private List<Game> topPlayer = new ArrayList<>();
 
-    public List<Player> getPreviousWinner() {
+    public List<Game> getPreviousWinner() {
         return previousWinner;
     }
 
-    public void setPreviousWinner(List<Player> previousWinner) {
+    public void setPreviousWinner(List<Game> previousWinner) {
         this.previousWinner = previousWinner;
     }
 
-    public List<Player> getTopPlayer() {
+    public List<Game> getTopPlayer() {
         return topPlayer;
     }
 
-    public void setTopPlayer(List<Player> topPlayer) {
+    public void setTopPlayer(List<Game> topPlayer) {
         this.topPlayer = topPlayer;
     }
 

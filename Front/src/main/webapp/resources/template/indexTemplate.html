@@ -1,23 +1,46 @@
 <div class="row">
-    <div class="col-lg-2 social">
+    <div class="col-lg-3 social">
         <div class="row">
             <div class="gift">
                 <div class="img_gift">
                     <img src="/resources/img/gift.png" class="center">
                 </div>
-                <p>{{application.text["GiftAddNickName"]}} <span class="span1">{{setting[0].siteName}}</span> {{application.text["angGet"]}} <span
-                        class="span2">{{application.text["bonus"]}}</span> {{application.text["toWin"]}} <span class="span2">{{setting[0].bonus}}%</span></p>
+                <p>{{application.text["GiftAddNickName"]}}
+                    <br>
+                    <span class="span1">{{setting[0].siteName}}</span>
+                    <br>
+                    {{application.text["angGet"]}} <span
+                            class="span2">{{application.text["bonus"]}}</span> {{application.text["toWin"]}} <span
+                            class="span2">{{setting[0].bonus}}%</span></p>
             </div>
         </div>
         <br>
 
         <div class="row">
-            <div class="vk">
-               <a href="{{setting[0].vkgroupUrl}}" target="_blank" style="color:#ffffff"> <i class="fa fa-vk"><p>{{application.text["joinUs"]}}</p></i> </a>
+            <!--<div class="vk">-->
+            <!--<a href="{{setting[0].vkgroupUrl}}" target="_blank" style="color:#ffffff"> <i class="fa fa-vk"><p>{{application.text["joinUs"]}}</p></i> </a>-->
+            <!--</div>-->
+            <div class="gift">
+
+                <div><!--ng-show="game.lastWinnerNickName"-->
+                    <h3 class="title-lastWinner text-center">{{application.text["lastWinner"]}}</h3>
+
+                    <div class="thumbnail user">
+                        <img ng-src="{{game.lastWinnerImageUrl}}">
+
+                        <div class="caption text-center">
+                            <p class="span2">{{game.lastWinnerNickName}}</p>
+                        </div>
+                    </div>
+                </div>
+                <p>{{application.text["online"]}}: {{game.countVisitors}}
+
+                <p>
             </div>
         </div>
     </div>
-    <div class="col-lg-9 statistic-info">
+
+    <div class="col-lg-7  statistic-info">
         <div class="content">
             <div class="content1">
                 <div class="content">
@@ -33,25 +56,28 @@
                         </div>
                         <div class="row">
                             <div class="info_col">
-                                <div class="col-lg-3">
+                                <div class="col-lg-3 info-col">
                                     <div class="info_name">{{application.text["todayGame"]}}</div>
                                     <div class="info_number">{{statistic.countGames}}</div>
                                 </div>
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-3 info-col">
                                     <div class="info_name">{{application.text["todayCountWeapon"]}}</div>
                                     <div class="info_number">{{statistic.countWeapons}}</div>
                                 </div>
 
-                                <div class="col-lg-3">
+                                <div class="col-lg-3 info-col">
                                     <div class="info_name">{{application.text["todayPlayer"]}}</div>
                                     <div class="info_number">{{statistic.countPlayers}}</div>
                                 </div>
 
-                                <div class="col-lg-3">
-                                    <div class="info_name">{{application.text["todayMaxPrize"]}} {{application.text.valute}}</div>
-                                    <div class="info_number">{{application.language == 'ru' ? statistic.maxCash.rub.toFixed(2) : statistic.maxCash.usd.toFixed(2)}}
-                                        </div>
+                                <div class="col-lg-3 info-col">
+                                    <div class="info_name">{{application.text["todayMaxPrize"]}}
+                                        {{application.text.valute}}
+                                    </div>
+                                    <div class="info_number">{{application.language == 'ru' ?
+                                        statistic.maxCash.rub.toFixed(2) : statistic.maxCash.usd.toFixed(2)}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -62,35 +88,56 @@
                             <div class="row text-center vertical-line">
                                 <h2 class="line">{{application.text["game"]}} № {{game.id}}</h2>
 
-                                <h2 class="line">{{application.text["bank"]}} {{application.language == 'ru' ? game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
+                                <h2 class="line">{{application.text["bank"]}} {{application.language == 'ru' ?
+                                    game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
                                     {{application.text.valute}}</h2>
 
                                 <h2 class="line">{{application.text["madeItems"]}} {{game.countWeapons}}</h2>
 
+                                <p ng-show="game.players.length < setting[0].countPlayerForStartGame"
+                                   class="text-center">
+                                    Вступило игроков {{game.players.length}} {{application.text["from"]}}
+                                    {{setting[0].countPlayerForStartGame}}</p>
                             </div>
-                            <div class="row users">
+                            <div class="row users" ng-show="game.players.length">
 
                                 <div class="line" ng-repeat="player in game.players">
                                     <div class="thumbnail line user">
-                                        <img ng-src="{{player.imageUrl}}">
+                                        <img ng-src="{{player.imageUrl}}" class="fix-size">
 
                                         <div class="caption text-center">
                                             <h3>{{player.nickName}}</h3>
 
-                                            <p>{{player.probability.toFixed(3)}} <span class="plus-gift" ng-show="player.nickName.indexOf(setting[0].siteName) != -1">+5</span> %</p>
+                                            <p>{{player.probability.toFixed(3)}} <span class="plus-gift"
+                                                                                       ng-show="player.nickName.indexOf(setting[0].siteName) != -1">+5</span>
+                                                %</p>
+
+
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <h1 ng-show="game.players.length < setting[0].countPlayerForStartGame" class="text-center">
-                                {{game.players.length}} {{application.text["from"]}} {{setting[0].countPlayerForStartGame}}</h1>
+                        <div class="col-lg-3" ng-show="game.players.length >= setting[0].countPlayerForStartGame">
+
 
                             <h1 class="text-center">{{application.text["beforeGame"]}}</h1>
-
-                            <div class="timer text-center">{{setting[0].secondsBeforeGameOver - counter > 0 ? setting[0].secondsBeforeGameOver - counter : 0}}{{application.text["sec"]}}</div>
+                            <div class="counter text-center">
+                                    <progress-arc
+                                            size="200"
+                                            stroke="black"
+                                            stroke-width="20"
+                                            complete="-counter / setting[0].secondsBeforeGameOver"
+                                            counter-clockwise="true"
+                                            background="#ccc"
+                                           >
+                                    </progress-arc>
+                                    <h1 class="timer-text">
+                                        {{setting[0].secondsBeforeGameOver - counter > 0 ?
+                                        setting[0].secondsBeforeGameOver - counter : 0}}{{application.text["sec"]}}
+                                    </h1>
+                                </div>
 
                             <div class="text-center">
                                 <button class="btn btn-danger btn-lg line" data-toggle="modal" data-target="#tread">
@@ -109,35 +156,25 @@
 </div>
 
 
-<div class="row">
-    <div class="col-lg-2">
+<div class="row weapons">
 
-        <div><!--ng-show="game.lastWinnerNickName"-->
-            <h1>{{application.text["lastWinner"]}}</h1>
-
-            <div class="thumbnail line user">
-                <img ng-src="{{game.lastWinnerImageUrl}}">
-
-                <div class="caption text-center">
-                    <h3>{{game.lastWinnerNickName}}</h3>
-                </div>
-            </div>
-        </div>
-        <h2>{{application.text["online"]}}: {{game.countVisitors}}</h2>
-    </div>
-    <div class="col-lg-9">
+    <div class="col-lg-12">
         <div ng-repeat="player in game.players">
-            <div ng-repeat="weapon in player.weaponList">
-                <img class="line weapon-img"
-                     ng-src="{{weapon.imageUrl}}">
+            <div ng-repeat="weapon in player.weaponList" class="weapon">
+                <img class="line weapon-img fix-size"
+                     ng-src="{{player.imageUrl}}">
 
                 <h1 class="line weapon-text">{{player.nickName}}</h1>
 
                 <h1 class="line weapon-text">{{application.text["contributed"]}}</h1>
 
+                <img class="line weapon-img fix-size"
+                     ng-src="{{weapon.imageUrl}}">
+
                 <h1 class="line weapon-text">{{weapon.weaponName}}</h1>
 
-                <h1 class="line weapon-text">{{application.language == 'ru' ? weapon.price.rub.toFixed(2): weapon.price.usd.toFixed(2)}}
+                <h1 class="line weapon-text">{{application.language == 'ru' ? weapon.price.rub.toFixed(2):
+                    weapon.price.usd.toFixed(2)}}
                     {{application.text.valute}}</h1>
             </div>
         </div>
@@ -148,13 +185,17 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">{{application.text["tradeLink"]}}</h4>
             </div>
             <div class="modal-body">
                 <p><a href="{{setting[0].linkTradeOffer}}" target="_blank">{{setting[0].linkTradeOffer}}</a></p>
+
                 <p class="danger">{{application.text["danger"]}}</p>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
 </div>

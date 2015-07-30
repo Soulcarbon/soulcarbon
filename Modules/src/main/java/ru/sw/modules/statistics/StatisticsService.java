@@ -1,7 +1,10 @@
 package ru.sw.modules.statistics;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.sw.modules.bootstrapService.InitialServiceInfo;
+import ru.sw.modules.game.Game;
+import ru.sw.modules.game.GameRepository;
 import ru.sw.modules.steam.utils.Price;
 import ru.sw.platform.core.annotations.Action;
 import ru.sw.platform.core.services.AbstractService;
@@ -14,7 +17,8 @@ import java.util.List;
 @Service("StatisticsService")
 public class StatisticsService extends AbstractService {
 
-
+    @Autowired
+    private GameRepository gameRepository;
 
     @Action(name = "statistics")
     public Statistics statisticses(HashMap<String, Object> map) {
@@ -66,6 +70,11 @@ public class StatisticsService extends AbstractService {
         statistics.setCountWeapons(sumCountWeapon);
         statistics.setMaxCash(new Price(maxRub,maxUsd));
 
+        List<Game> lastGames = entityManager.createQuery("select g from Game g order by g.id desc").setMaxResults(30).getResultList();
+        statistics.setPreviousWinner(lastGames);
+
+        List<Game> topGames = entityManager.createQuery("select g from Game g order by g.total.rub desc").setMaxResults(30).getResultList();
+        statistics.setTopPlayer(topGames);
 
         return statistics;
     }

@@ -54,8 +54,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         sessionList.add(session);
         activeGame.setCountVisitors(sessionList.size());
         if(startGame != null) {
-            long seconds = (Calendar.getInstance().getTime().getTime()-startGame.getTime().getTime())/1000;
-            activeGame.setSecondsFromStartGame(new Integer((int) seconds));
+            activeGame.setSecondsFromStartGame(secondsAfterStartGame());
         }
         updateSession();
         System.err.println("Session open");
@@ -74,9 +73,15 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
         updateSession();
     }
 
+    private Integer secondsAfterStartGame() {
+        long seconds = (Calendar.getInstance().getTime().getTime()-startGame.getTime().getTime())/1000;
+        return new Integer((int) seconds);
+    }
+
     public void startGame(){
         activeGame.setState(Game.GameState.Active);
         startGame = Calendar.getInstance();
+        activeGame.setSecondsFromStartGame(secondsAfterStartGame());
         new Thread(new Runnable() {
             @Override
             public void run() {

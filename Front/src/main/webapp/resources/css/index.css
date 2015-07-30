@@ -1,11 +1,12 @@
 body{
     font-family: 'Lora', serif;
 
+    background: url("/resources/img/tweed.png");
+    /*background: #414141;*/
+    /*background: #373737;*/
 
-    background: #121212 url("/resources/img/fon.jpg")  top no-repeat;
-
-    background-attachment: fixed;
-    background-size: 100%;
+    /*background-attachment: fixed;*/
+    /*background-size: 100%;*/
     font-size: 18px;
     color:white;
 }
@@ -33,8 +34,8 @@ body{
 
 /* Logo */
 .nav-logo{
-    margin-top:11px;
-    margin-bottom:11px;
+    margin-top:15px;
+    margin-bottom:15px;
 }
 .logo {
     padding: 5px 15px;
@@ -123,7 +124,12 @@ body{
     pointer-events: none;
     opacity: 1;
 }
-
+@media all and (max-width: 970px) {
+    .statistic-info{
+        padding-left: 0;
+        margin-top: 40px;
+    }
+}
 /* Making the header responsive */
 @media all and (max-width: 800px) {
     .logo .logo2{
@@ -134,12 +140,14 @@ body{
     .logo{
         padding: 10px 15px;
     }
+
 }
 
 @media all and (max-width: 690px) {
     .logo{
         padding: 5px 15px;
     }
+
 }
 
 @media all and (max-width: 650px) {
@@ -173,6 +181,7 @@ body{
         font-size: 13px;
     }
 
+
 }
 
 /* For the headers to look good, be sure to reset the margin and padding of the body */
@@ -192,7 +201,11 @@ body {
 /*Подарок с лево*/
 .gift {
     background: #351A33;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     padding: 30px;
+    min-width: 250px;
 }
 
 .gift:hover{
@@ -233,7 +246,11 @@ body {
    background: #6383a8;
 }
 
-
+.title-lastWinner{
+    word-break: normal;
+    white-space: pre-line;
+    font-size: 28px;
+}
 
 /*модели игроков,побед,история,итп*/
 
@@ -242,39 +259,43 @@ body {
 /*информ окно с колонками*/
 
 .statistic{
-    background: #000;
+    background: #351A33;
     padding:10px 40px 10px 40px;
     text-align: center;
 
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px rgba(0,0,0,0.75);
+    border-radius: 10px;
+}
+.statistic-info{
+    margin-left: 1%;
+}
+.info-col:hover{
+    background: #912387;
 }
 
-.info_wind{
-
-}
-.info_col{
-
-}
-.info_col div{
-    background: #121212;
-
-}
 .info_name{
-    color: #C60FB5;
+    color: #FEF90E;
 }
 .info_number{
     font-size: 30px;
-    color: lime;
+    color: #83F24A;
 }
 
 
 .currentGame {
-
+    margin-top: 100px;
 }
 
 .navbar-right li {
     cursor: pointer;
 }
 
+img.fix-size{
+    height: 120px;
+    width:120px;
+}
 
 .line{
     display: inline-block;
@@ -316,7 +337,14 @@ body {
 .plus-gift {
     color: lime;
 }
+.weapons{
+    margin-top:70px;
+    margin-left:15px;
+}
 
+.weapon{
+    margin-bottom: 10px;
+}
 .weapon-img {
     width: 240px;
     height: 190px;
@@ -337,4 +365,14 @@ body {
     border-radius: 10px;
     padding: 25px;
     color: #ECECEC;
+}
+
+.counter{
+    position: relative;
+}
+
+.timer-text{
+    position: absolute;
+    top: 60px;
+    left: 70px;
 }
