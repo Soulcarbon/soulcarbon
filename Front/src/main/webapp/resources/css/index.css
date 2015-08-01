@@ -390,3 +390,7 @@ img.fix-size{
 .progress{
     height: 40px;
 }
+
+.indent{
+    margin-left: 60px;
+}
