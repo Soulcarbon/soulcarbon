@@ -1,3 +1,5 @@
+
+
 <div class="row super-class">
     <div class="col-lg-3 social">
         <div class="row">
@@ -89,11 +91,17 @@
                                     Вступило игроков {{game.players.length}} {{application.text["from"]}}
                                     {{setting[0].countPlayerForStartGame}}</p>
                                 <div class="progress">
-                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-                                        {{application.text["game"]}} № {{game.id}}
-                                        {{application.text["madeItems"]}} {{game.countWeapons}} на сумму {{application.language == 'ru' ?
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                                        <div class="row">
+                                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" >
+                                       <div class="game "> {{application.text["game"]}} # {{game.id}}</div>
+                                        </div>
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                       <div class="game1 "> {{application.text["madeItems"]}} {{game.countWeapons}} на сумму {{application.language == 'ru' ?
                                         game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
-                                        {{application.text.valute}}
+                                        {{application.text.valute}}</div>
+                                    </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -387,10 +387,22 @@ img.fix-size{
 
 }
 
-.progress{
+.progress {
     height: 40px;
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .indent{
-    margin-left: 60px;
+    margin-left:60px;
+}
+.game{
+     background:linear-gradient(to bottom left, #bbb, white);
+     height: 40px;
+     color: gray;
+     font-size: 18px;
+     padding-top: 10px;
+}
+.game1{
+    font-size: 23px;
+    padding-top: 10px;
 }
