@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row super-class">
     <div class="col-lg-3 social">
         <div class="row">
             <div class="gift">
@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <div class="col-lg-7  statistic-info">
+    <div class="col-lg-9  statistic-info">
         <div class="content">
             <div class="content1">
                 <div class="content">
@@ -48,9 +48,7 @@
                     <div class="statistic">
                         <div class="row">
                             <div class="info_wind">
-                                <p>{{application.text["info"]}}</p>
-
-                                <p align="justify">{{application.text["infoRight"]}}</p>
+                                <p class="info-text">{{application.text["infoRight"]}}</p>
                             </div>
 
                         </div>
@@ -86,18 +84,18 @@
                     <div class="currentGame row">
                         <div class="col-lg-8 indent">
                             <div class="row text-center vertical-line">
-                                <h2 class="line">{{application.text["game"]}} № {{game.id}}</h2>
-
-                                <h2 class="line">{{application.text["bank"]}} {{application.language == 'ru' ?
-                                    game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
-                                    {{application.text.valute}}</h2>
-
-                                <h2 class="line">{{application.text["madeItems"]}} {{game.countWeapons}}</h2>
-
                                 <p ng-show="game.players.length < setting[0].countPlayerForStartGame"
                                    class="text-center">
                                     Вступило игроков {{game.players.length}} {{application.text["from"]}}
                                     {{setting[0].countPlayerForStartGame}}</p>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:80%">
+                                        {{application.text["game"]}} № {{game.id}}
+                                        {{application.text["madeItems"]}} {{game.countWeapons}} на сумму {{application.language == 'ru' ?
+                                        game.total.rub.toFixed(2) : game.total.usd.toFixed(2)}}
+                                        {{application.text.valute}}
+                                    </div>
+                                </div>
                             </div>
                             <div class="row users" ng-show="game.players.length">
 
@@ -119,10 +117,11 @@
 
                             </div>
                         </div>
-                        <div class="col-lg-3"> <!--ng-show="game.players.length >= setting[0].countPlayerForStartGame">-->
-
-
-                            <h1 class="text-center">{{application.text["beforeGame"]}}</h1>
+                        <div class="col-lg-4"> <!--ng-show="game.players.length >= setting[0].countPlayerForStartGame">-->
+                            <h1 class="text-center">{{application.text["beforeGame"]}}
+                                {{setting[0].secondsBeforeGameOver - counter > 0 ?
+                                setting[0].secondsBeforeGameOver - counter : 0}}{{application.text["sec"]}}
+                            </h1>
                             <div class="counter text-center">
                                     <progress-arc
                                             size="200"
@@ -133,13 +132,9 @@
                                             background="#ccc"
                                            >
                                     </progress-arc>
-                                    <h1 class="timer-text">
-                                        {{setting[0].secondsBeforeGameOver - counter > 0 ?
-                                        setting[0].secondsBeforeGameOver - counter : 0}}{{application.text["sec"]}}
-                                    </h1>
                                 </div>
 
-                            <div class="text-center">
+                            <div class="text-center margin-20">
                                 <button class="btn btn-danger btn-lg line" data-toggle="modal" data-target="#tread">
                                     {{application.text["joinToGame"]}}
                                 </button>

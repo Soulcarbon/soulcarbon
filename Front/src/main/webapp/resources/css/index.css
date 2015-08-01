@@ -124,7 +124,7 @@ body{
     pointer-events: none;
     opacity: 1;
 }
-@media all and (max-width: 970px) {
+@media all and (max-width: 1100px) {
     .statistic-info{
         padding-left: 0;
         margin-top: 40px;
@@ -200,7 +200,7 @@ body {
 }
 /*Подарок с лево*/
 .gift {
-    background: #351A33;
+    background: #212B1D;
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
@@ -209,7 +209,7 @@ body {
 }
 
 .gift:hover{
-    background: #912387;
+    background: #417030;
 }
 
 .img_gift {
@@ -218,7 +218,7 @@ body {
     /*margin: 0 auto;*/
 }
 .social{
-    margin-left: 1%;
+    /*margin-left: 1%;*/
 }
 
 .gift p{
@@ -259,20 +259,19 @@ body {
 /*информ окно с колонками*/
 
 .statistic{
-    background: #351A33;
+    background: #212B1D;
     padding:10px 40px 10px 40px;
     text-align: center;
 
     -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     box-shadow: 10px 10px 5px rgba(0,0,0,0.75);
-    border-radius: 10px;
 }
 .statistic-info{
-    margin-left: 1%;
+    /*margin-left: 1%;*/
 }
 .info-col:hover{
-    background: #912387;
+    background: #417030;
 }
 
 .info_name{
@@ -302,9 +301,6 @@ img.fix-size{
     margin:0 15px;
 }
 
-.indent{
-    margin-left:20px;
-}
 .vertical-line{
     margin-bottom:20px;
     line-height: 35px;
@@ -375,4 +371,22 @@ img.fix-size{
     position: absolute;
     top: 60px;
     left: 70px;
+}
+
+.margin-20 {
+    margin: 20px 0;
+}
+
+.info-text{
+    font-size : 21px;
+    text-align: justify;
+}
+
+.super-class{
+    margin: auto 20px;
+
+}
+
+.progress{
+    height: 40px;
 }

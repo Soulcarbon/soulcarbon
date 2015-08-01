@@ -31,7 +31,7 @@
                 </button>
                     <div class="navbar-brand logo">
                         <a ui-sref="home">
-                            <img class="logo2" src="/resources/img/logo5.png">
+                            <img class="logo2" src="/resources/img/logo.png">
                         </a>
                     </div>
             </div>
