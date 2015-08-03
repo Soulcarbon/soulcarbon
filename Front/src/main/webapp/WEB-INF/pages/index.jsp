@@ -62,13 +62,16 @@
 </div>
 
 <script src="/resources/bower_components/jQuery/dist/jquery.min.js"></script>
+<script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/resources/bower_components/angular/angular.min.js"></script>
+<script src="/resources/bower_components/sly/dist/sly.js"></script>
 <script src="/resources/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/resources/bower_components/ng-websocket/ng-websocket.js"></script>
 <script src="/resources/bower_components/angular-progress-arc/angular-progress-arc.min.js"></script>
 <script src="/resources/application/platform.js"></script>
 <script src="/resources/application/index.js"></script>
+<script src="/resources/bower_components/angular-sly/dist/angular-sly.js"></script>
 <c:forEach items="${scripts}" var="src">
     <script src="${src}"></script>
 </c:forEach>
