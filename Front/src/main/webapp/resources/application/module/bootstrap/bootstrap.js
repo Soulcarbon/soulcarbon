@@ -1,5 +1,5 @@
 model.controller("bootstrapCtrl" , function ($scope,applicationService) {
-
+    applicationService.pageInfo($scope);
     var className = "ru.sw.modules.bootstrapService.InitialServiceInfo";
 
     applicationService.list($scope, "serviceList",className);

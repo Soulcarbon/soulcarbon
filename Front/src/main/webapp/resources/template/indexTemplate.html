@@ -310,7 +310,7 @@
 <div class="row weapons text-center">
 
     <div class="col-lg-12">
-        <div ng-repeat="player in game.players">
+        <div ng-repeat="player in game.players.slice().reverse()">
             <div ng-repeat="weapon in player.weaponList" class="weapon">
                 <img class="line weapon-img fix-size"
                      ng-src="{{player.imageUrl}}">
