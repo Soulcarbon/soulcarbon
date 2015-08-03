@@ -124,66 +124,7 @@ body{
     pointer-events: none;
     opacity: 1;
 }
-@media all and (max-width: 1100px) {
-    .statistic-info{
-        padding-left: 0;
-        margin-top: 40px;
 
-    }
-}
-/* Making the header responsive */
-@media all and (max-width: 800px) {
-    .logo .logo2{
-        width: 70px;
-        height: 45px;
-    }
-
-    .logo{
-        padding: 10px 15px;
-    }
-
-}
-
-@media all and (max-width: 690px) {
-    .logo{
-        padding: 5px 15px;
-    }
-
-}
-
-@media all and (max-width: 650px) {
-    .logo .logo2{
-        width: 70px;
-        height: 45px;
-    }
-
-    .logo{
-        padding: 2px 15px;
-    }
-
-    .header-basic {
-        height: 75px;
-    }
-
-    .header-basic .header-limiter h1 {
-        float: none;
-        margin: -8px 0 10px;
-        text-align: center;
-        font-size: 24px;
-        line-height: 1;
-    }
-
-    .header-basic .header-limiter nav {
-        line-height: 1;
-        float:none;
-    }
-
-    .header-basic .header-limiter nav a {
-        font-size: 13px;
-    }
-
-
-}
 
 /* For the headers to look good, be sure to reset the margin and padding of the body */
 
@@ -447,4 +388,78 @@ table.table-info>tbody>tr>td, table.table-info>tbody>tr>th{
 
 .table-hover>tbody>tr:hover{
     background-color: #a0a0a0;
+}
+
+.first-row{
+    height: 330px;
+}
+
+
+/* Making the header responsive */
+@media all and (max-width: 1100px) {
+    .statistic-info{
+        padding-left: 0;
+        margin-top: 40px;
+        padding-right: 0;
+    }
+
+    .mobile-bar{
+        margin-left: 0;
+        margin-right: 20px;
+    }
+    .indent {
+        margin-left: 20px;
+    }
+}
+@media all and (max-width: 800px) {
+    .logo .logo2{
+        width: 70px;
+        height: 45px;
+    }
+
+    .logo{
+        padding: 10px 15px;
+    }
+
+}
+
+@media all and (max-width: 690px) {
+    .logo{
+        padding: 5px 15px;
+    }
+
+}
+
+@media all and (max-width: 650px) {
+    .logo .logo2{
+        width: 70px;
+        height: 45px;
+    }
+
+    .logo{
+        padding: 2px 15px;
+    }
+
+    .header-basic {
+        height: 75px;
+    }
+
+    .header-basic .header-limiter h1 {
+        float: none;
+        margin: -8px 0 10px;
+        text-align: center;
+        font-size: 24px;
+        line-height: 1;
+    }
+
+    .header-basic .header-limiter nav {
+        line-height: 1;
+        float:none;
+    }
+
+    .header-basic .header-limiter nav a {
+        font-size: 13px;
+    }
+
+
 }

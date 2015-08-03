@@ -1,7 +1,7 @@
 <div class="row super-class">
     <div class="col-lg-3 social">
         <div class="row">
-            <div class="gift">
+            <div class="gift first-row">
                 <div class="img_gift">
                     <img src="/resources/img/gift.png" class="center">
                 </div>
@@ -20,7 +20,7 @@
             <!--<div class="vk">-->
             <!--<a href="{{setting[0].vkgroupUrl}}" target="_blank" style="color:#ffffff"> <i class="fa fa-vk"><p>{{application.text["joinUs"]}}</p></i> </a>-->
             <!--</div>-->
-            <div class="gift">
+            <div class="gift ">
 
                 <div><!--ng-show="game.lastWinnerNickName"-->
                     <h3 class="title-lastWinner text-center">{{application.text["lastWinner"]}}</h3>
@@ -45,7 +45,7 @@
             <div class="content1">
                 <div class="content">
 
-                    <div class="statistic">
+                    <div class="statistic first-row">
                         <div class="row">
                             <div class="info_wind">
                                 <p class="info-text">{{application.text["infoRight"]}}</p>
@@ -83,7 +83,7 @@
                                     Вступило игроков {{game.players.length}} {{application.text["from"]}}
                                     {{setting[0].countPlayerForStartGame}}</p>
 
-                                <div class="row">
+                                <div class="row mobile-bar">
 
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped active"
@@ -133,7 +133,7 @@
                             <div class="counter text-center">
                                 <progress-arc
                                         size="200"
-                                        stroke="black"
+                                        stroke="#89F24A"
                                         stroke-width="20"
                                         complete="-counter / setting[0].secondsBeforeGameOver"
                                         counter-clockwise="true"
@@ -162,20 +162,20 @@
 
 </div>
 <div class="row">
-    <div class="scrollbar">
-        <div class="handle">
-            <div class="mousearea"></div>
-        </div>
-    </div>
-    <div class="frame" sly-horizontal id="basicSly">
-        <ul class="clearfix">
-            <li ng-repeat="player in game.players" sly-horizontal-repeat>
-                <!--<img class="line weapon-img fix-size"-->
-                     <!--ng-src="{{player.imageUrl}}">-->
-                {{game.id}}
-            </li>
-        </ul>
-    </div>
+    <!--<div class="scrollbar">-->
+        <!--<div class="handle">-->
+            <!--<div class="mousearea"></div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="frame" sly-horizontal id="basicSly">-->
+        <!--<ul class="clearfix">-->
+            <!--<li ng-repeat="player in game.players" sly-horizontal-repeat>-->
+                <!--&lt;!&ndash;<img class="line weapon-img fix-size"&ndash;&gt;-->
+                     <!--&lt;!&ndash;ng-src="{{player.imageUrl}}">&ndash;&gt;-->
+                <!--{{game.id}}-->
+            <!--</li>-->
+        <!--</ul>-->
+    <!--</div>-->
     <style>
 
         /* Frame */

@@ -17,7 +17,7 @@ var offer = { tradeofferid: '603784123',
     time_created: 1437987922,
     time_updated: 1437987934,
     from_real_time_trade: false,
-    steamid_other: '76561198040905470' };
+    steamid_other: '76561197991709700' };
 //76561198193580819
 //76561198019501084
 //76561198170903117
