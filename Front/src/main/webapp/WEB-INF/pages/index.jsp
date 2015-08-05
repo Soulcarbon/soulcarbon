@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html ng-app="mainApp" ng-controller="indexController">
 <head>
-    <title>todo</title>
+    <title>{{application.title}}</title>
     <meta charset="utf-8"/>
     <meta name="viewport content=" width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="/resources/bower_components/bootstrap/dist/css/bootstrap.min.css">

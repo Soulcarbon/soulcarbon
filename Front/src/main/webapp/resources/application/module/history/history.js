@@ -1,3 +1,3 @@
-model.controller("historyCtrl" , function ($scope) {
-
+model.controller("historyCtrl" , function ($scope,applicationService) {
+    applicationService.pageInfo($scope);
 });
