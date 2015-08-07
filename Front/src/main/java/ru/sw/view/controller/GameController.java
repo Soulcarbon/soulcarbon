@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -28,6 +30,8 @@ import java.util.*;
 @RequestMapping(value = "/game")
 public class GameController {
 
+
+    Logger logger = LoggerFactory.getLogger(GameController.class);
 
     @Autowired
     @Qualifier("echo")
@@ -60,11 +64,18 @@ public class GameController {
                 Weapon weapon = weaponRepository.getSingleEntityByFieldAndValue(Weapon.class, "classId", classId);
                 if(weapon == null) {
                     String appid = (String) weaponJson.get("appid");
-                    weapon = SteamUtil.getWeaponByClassId(classId, appid);
+                    try {
+                        weapon = SteamUtil.getWeaponByClassId(classId, appid);
+                    } catch(Exception e) {
+                        logger.warn("Can't add weapon by classId : " + classId + ", and appId " + appid);
+                        continue;
+                    }
+                    weapon.setUserSteamId(player.getSteamId());
                     weaponRepository.create(weapon);
                 }
 
                 if (weapon != null) {
+                    weapon.setUserSteamId(player.getSteamId());
                     for (int j = 0; j < amount; j++) {
                         weapon_list.add(weapon);
                         totalCost.addPrice(weapon.getPrice());

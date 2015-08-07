@@ -5,10 +5,7 @@ import ru.sw.platform.core.annotations.ModuleInfo;
 import ru.sw.platform.core.entity.AbstractEntity;
 import ru.sw.platform.core.entity.UserList;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "weapon")
@@ -36,6 +33,17 @@ public class Weapon extends AbstractEntity {
     @Column(unique = true, name="class_id")
     private String classId;
 
+    @Transient
+    private String userSteamId;
+
+
+    public String getUserSteamId() {
+        return userSteamId;
+    }
+
+    public void setUserSteamId(String userSteamId) {
+        this.userSteamId = userSteamId;
+    }
 
     public String getWeaponName() {
         return weaponName;

@@ -138,6 +138,10 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                         int i = 0;
                         for(Weapon weapon : winnerEntry.getList()){
 
+                            if(weapon.getUserSteamId().equals(winner.getSteamId())) {
+                                continue;
+                            }
+
                             Double tempPercent = weapon.getPrice().getRub() / activeGame.getTotal().getRub() * 100;
                             if(tempPercent+totalPercent <= settings.get(0).getRate()+3) {
                                 totalPercent += tempPercent;
@@ -145,7 +149,7 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                             }
                             i++;
                         }
-                        System.err.println("Indexes size : " + indexes.size());
+                        logger.info("Number of won items : " + indexes.size() + ", game id: " + activeGame.getId());
                         for(int removeIndex : indexes) {
                             winnerEntry.getList().remove(removeIndex);
                         }

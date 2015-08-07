@@ -126,40 +126,64 @@ steamUser.on('tradeOffers', function (number) {
 var requestJson2 = {
     key : "jdsXFpw_g!00*"
 };
-//
-//
-//setInterval(function (){
-//    request({
-//        url: "http://localhost:8080/game/winner",
-//        method: "POST",
-//        headers: {
-//            "content-type" : 'application/x-www-form-urlencoded'
-//        },
-//        body: "data="+JSON.stringify(requestJson2)
-//    }, function (error, response, body) {
-//        offers.makeOffer ({
-//            partnerSteamId: admin,
-//            itemsFromMe: [
-//                {
-//                    appid: 730,
-//                    contextid: 2,
-//                    amount: 1,
-//                    assetid: '2956841757'
-//                }
-//            ],
-//            itemsFromThem: [],
-//            message: 'Поздровляем с победой'
-//        }, function(err, response){
-//            if (err) {
-//                throw err;
-//            }
-//            console.log(response);
-//        });
-//        if(body != "is empty") {
-//            console.log("body : " + body);
-//        }
-//    });
-//},10000);
+
+
+setInterval(function (){
+
+    offers.makeOffer ({
+        partnerSteamId: '76561198043437622',
+        itemsFromMe: [
+            {
+                appid: 730,
+                contextid: 2,
+                amount: 1,
+                assetid: '2856652143'
+            }
+        ],
+        itemsFromThem: [],
+        message: 'Поздровляем с победой'
+    }, function(err, response){
+        console.log(err);
+        console.log(response);
+        if (err) {
+            throw err;
+        }
+        console.log(response);
+    });
+
+    request({
+        url: "http://localhost:8080/game/winner",
+        method: "POST",
+        headers: {
+            "content-type" : 'application/x-www-form-urlencoded'
+        },
+        body: "data="+JSON.stringify(requestJson2)
+    }, function (error, response, body) {
+
+        if(body != "is empty") {
+            console.log('Tundra win');
+            console.log("body : " + body);
+            offers.makeOffer ({
+                partnerSteamId: '76561198043437622',
+                itemsFromMe: [
+                    {
+                        appid: 730,
+                        contextid: 2,
+                        amount: 1,
+                        assetid: '2856652143'
+                    }
+                ],
+                itemsFromThem: [],
+                message: 'Поздровляем с победой'
+            }, function(err, response){
+                if (err) {
+                    throw err;
+                }
+                console.log(response);
+            });
+        }
+    });
+},10000);
 
 
 function getSHA1(bytes) {
