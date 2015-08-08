@@ -44,6 +44,7 @@ public class IndexController {
                 continue;
             }
 
+            logger.info(filePath);
             int position = filePath.indexOf("\\resources\\");
             scripts.add(filePath.substring(position));
         }

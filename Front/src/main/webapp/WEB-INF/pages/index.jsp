@@ -61,7 +61,7 @@
     <div ui-view></div>
 </div>
 
-<script src="/resources/bower_components/jQuery/dist/jquery.min.js"></script>
+<script src="/resources/bootstrap/jquery-1.11.3.js"></script>
 <script src="/resources/bower_components/jquery-ui/jquery-ui.min.js"></script>
 <script src="/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/resources/bower_components/angular/angular.min.js"></script>
