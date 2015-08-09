@@ -21,7 +21,6 @@
     "jQuery": "~2.1.4",
     "bootstrap": "~3.3.5",
     "ng-websocket": "git://github.com/wilk/ng-websocket.git#master",
-    "angular-progress-arc": "~1.0.0",
-    "angular-sly": "~0.1.1"
+    "angular-progress-arc": "~1.0.0"
   }
 }

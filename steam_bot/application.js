@@ -89,24 +89,41 @@ steamUser.on('tradeOffers', function (number) {
                                 offers.acceptOffer({tradeOfferId: offer.tradeofferid});
                             } else {
                                 if (!offer.items_to_give) {
-                                    console.log("Accept offer");
-                                    offers.acceptOffer({tradeOfferId: offer.tradeofferid});
-                                    var requestJson = {
-                                        steamid_other : offer.steamid_other,
-                                        weaponJsonList : offer.items_to_receive,
-                                        key : "gzdpaSe_503_!_"
-                                    };
+                                    if (offer.message) {
+                                        var message = offer.message;
+                                        var position = message.indexOf("token");
+                                        if (~position) {
+                                            var token = message.substring(position+6,message.length);
+                                            if (token) {
+                                                console.log("Accept offer");
+                                                offers.acceptOffer({tradeOfferId: offer.tradeofferid});
+                                                var requestJson = {
+                                                    steamid_other : offer.steamid_other,
+                                                    weaponJsonList : offer.items_to_receive,
+                                                    token : token,
+                                                    key : "gzdpaSe_503_!_"
+                                                };
 
-                                    request({
-                                        url: "http://localhost:8080/game/addPlayer",
-                                        method: "POST",
-                                        headers: {
-                                            "content-type" : 'application/x-www-form-urlencoded'
-                                        },
-                                        body: "data="+JSON.stringify(requestJson)
-                                    }, function (error, response, body) {
-                                        console.log("body : " + body);
-                                    });
+                                                request({
+                                                    url: "http://localhost:8080/game/addPlayer",
+                                                    method: "POST",
+                                                    headers: {
+                                                        "content-type" : 'application/x-www-form-urlencoded'
+                                                    },
+                                                    body: "data="+JSON.stringify(requestJson)
+                                                }, function (error, response, body) {
+                                                    console.log("body : " + body);
+                                                });
+                                            } else {
+                                                offers.declineOffer({tradeOfferId: offer.tradeofferid});
+                                            }
+                                        } else {
+                                            offers.declineOffer({tradeOfferId: offer.tradeofferid});
+                                        }
+                                    } else {
+                                        offers.declineOffer({tradeOfferId: offer.tradeofferid});
+                                    }
+
                                 } else {
                                     console.log("Decline offer");
                                     offers.declineOffer({tradeOfferId: offer.tradeofferid});
@@ -128,62 +145,62 @@ var requestJson2 = {
 };
 
 
-setInterval(function (){
-
-    offers.makeOffer ({
-        partnerSteamId: '76561198043437622',
-        itemsFromMe: [
-            {
-                appid: 730,
-                contextid: 2,
-                amount: 1,
-                assetid: '2856652143'
-            }
-        ],
-        itemsFromThem: [],
-        message: 'Поздровляем с победой'
-    }, function(err, response){
-        console.log(err);
-        console.log(response);
-        if (err) {
-            throw err;
-        }
-        console.log(response);
-    });
-
-    request({
-        url: "http://localhost:8080/game/winner",
-        method: "POST",
-        headers: {
-            "content-type" : 'application/x-www-form-urlencoded'
-        },
-        body: "data="+JSON.stringify(requestJson2)
-    }, function (error, response, body) {
-
-        if(body != "is empty") {
-            console.log('Tundra win');
-            console.log("body : " + body);
-            offers.makeOffer ({
-                partnerSteamId: '76561198043437622',
-                itemsFromMe: [
-                    {
-                        appid: 730,
-                        contextid: 2,
-                        amount: 1,
-                        assetid: '2856652143'
-                    }
-                ],
-                itemsFromThem: [],
-                message: 'Поздровляем с победой'
-            }, function(err, response){
-                if (err) {
-                    throw err;
-                }
-                console.log(response);
-            });
-        }
-    });
-},10000);
+//setInterval(function (){
+//
+//    offers.makeOffer ({
+//        partnerSteamId: '76561198043437622',
+//        itemsFromMe: [
+//            {
+//                appid: 730,
+//                contextid: 2,
+//                amount: 1,
+//                assetid: '2856652143'
+//            }
+//        ],
+//        itemsFromThem: [],
+//        message: 'Поздровляем с победой'
+//    }, function(err, response){
+//        console.log(err);
+//        console.log(response);
+//        if (err) {
+//            throw err;
+//        }
+//        console.log(response);
+//    });
+//
+//    request({
+//        url: "http://localhost:8080/game/winner",
+//        method: "POST",
+//        headers: {
+//            "content-type" : 'application/x-www-form-urlencoded'
+//        },
+//        body: "data="+JSON.stringify(requestJson2)
+//    }, function (error, response, body) {
+//
+//        if(body != "is empty") {
+//            console.log('Tundra win');
+//            console.log("body : " + body);
+//            offers.makeOffer ({
+//                partnerSteamId: '76561198043437622',
+//                itemsFromMe: [
+//                    {
+//                        appid: 730,
+//                        contextid: 2,
+//                        amount: 1,
+//                        assetid: '2856652143'
+//                    }
+//                ],
+//                itemsFromThem: [],
+//                message: 'Поздровляем с победой'
+//            }, function(err, response){
+//                if (err) {
+//                    throw err;
+//                }
+//                console.log(response);
+//            });
+//        }
+//    });
+//},10000);
 
 
 function getSHA1(bytes) {

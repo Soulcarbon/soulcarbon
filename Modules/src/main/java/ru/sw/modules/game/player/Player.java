@@ -16,12 +16,21 @@ public class Player {
 
     private List<Weapon> weaponList = new ArrayList<>();
 
-   @Embedded
     private Price total;
 
     private double probability;
 
     private String steamId = "";
+
+    private String token;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     @JsonIgnore
     private boolean isWinner = false;

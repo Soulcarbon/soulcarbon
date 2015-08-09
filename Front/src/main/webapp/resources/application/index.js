@@ -1,7 +1,7 @@
-var model = angular.module("mainApp" , ["BackEndService" , 'ngWebsocket' , 'angular-progress-arc','angular-sly']);
+var model = angular.module("mainApp" , ["BackEndService" , 'ngWebsocket' , 'angular-progress-arc']);
 model.controller("indexController",function($scope,$timeout,$http,applicationService,$state,$websocket){
     var startCounter = false;
-    var ws = $websocket.$new('ws://lotteryskins-net.1gb.ru//connectToGame'); // instance of ngWebsocket, handled by $websocket service
+    var ws = $websocket.$new('ws://localhost:8080/connectToGame'); // instance of ngWebsocket, handled by $websocket service
 
     $scope.counter = 0;
 

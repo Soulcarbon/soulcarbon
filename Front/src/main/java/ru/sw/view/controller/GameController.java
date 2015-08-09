@@ -53,8 +53,10 @@ public class GameController {
 
         if(map.get("key").equals("gzdpaSe_503_!_")) {
             String steamId = (String) map.get("steamid_other");
+            String token = (String) map.get("token");
             List<LinkedHashMap<String,Object>> weaponJsonList = (List<LinkedHashMap<String,Object>>) map.get("weaponJsonList");
             Player player = SteamUtil.getPlayerBySteamId(steamId);
+            player.setToken(token);
             List<Weapon> weapon_list = new ArrayList<>();
             Price totalCost = new Price();
             for (int i = 0; i < weaponJsonList.size(); i++) {
