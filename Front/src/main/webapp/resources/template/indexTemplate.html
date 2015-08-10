@@ -106,12 +106,11 @@
                                 <div class="row users" ng-show="game.players.length">
 
                                     <div class="line" ng-repeat="player in game.players">
-                                        {{player}}
                                         <div class="thumbnail line user">
                                             <img ng-src="{{player.imageUrl}}" class="fix-size">
 
                                             <div class="caption text-center">
-                                                <h3><a href="/">{{player.nickName}}</a></h3>
+                                                <h3><a href="http://steamcommunity.com/profiles/{{player.steamId}}/" target="_blank" class="nickname">{{player.nickName}}</a></h3>
 
                                                 <p>{{player.probability.toFixed(3)}} <span class="plus-gift"
                                                                                            ng-show="player.nickName.indexOf(setting[0].siteName) != -1">+5</span>
@@ -199,6 +198,7 @@
                 <p><a href="{{setting[0].linkTradeOffer}}" target="_blank">{{setting[0].linkTradeOffer}}</a></p>
 
                 <p class="danger">{{application.text["danger"]}}</p>
+                <a href="{{'#/'+application.language+'/trade-link'}}" target="_blank">{{application.text.HowToPlay}}</a>
             </div>
         </div>
         <!-- /.modal-content -->

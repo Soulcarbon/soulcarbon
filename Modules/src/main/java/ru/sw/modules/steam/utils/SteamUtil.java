@@ -36,6 +36,7 @@ public class SteamUtil {
                 boolean success = jsonObject.getBoolean("success");
                 if (success) {
                     weapon.setWeaponName(name);
+                    weapon.setAppId(appid);
                     weapon.setImageUrl(imageUrl);
                     String price = jsonObject.get("lowest_price").toString();
                     //Dollar(USD)

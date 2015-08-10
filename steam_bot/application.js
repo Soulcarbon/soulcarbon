@@ -55,6 +55,54 @@ steamClient.on('logOnResponse', function (logonResp) {
                     sessionID: sessionID,
                     webCookie: newCookie,
                     APIKey: APIKey
+                }, function () {
+
+                    var requestJson2 = {
+                        key: "jdsXFpw_g!00*"
+                    };
+
+                    var timerId = setTimeout(function tick() {
+                        request({
+                            url: "http://localhost:8080/game/winner",
+                            method: "POST",
+                            headers: {
+                                "content-type": 'application/x-www-form-urlencoded'
+                            },
+                            body: "data=" + JSON.stringify(requestJson2)
+                        }, function (error, response, body) {
+                            console.log("!!!!");
+                            if (body != "is empty") {
+                                var winner = JSON.parse(body);
+                                console.log("winner ");
+
+                                var listAppID = [];
+                                var winnerItems = [];
+                                for (var i = 0; i < winner.list.length; i++) {
+                                    console.log(winner.list[i]);
+                                    winnerItems.push({
+                                        appid: 730,
+                                        contextid: 2,
+                                        amount: 1,
+                                        assetid: winner.list[i].assetid
+                                    });
+                                }
+
+                                offers.makeOffer({
+                                    partnerSteamId: winner.player.steamId,
+                                    accessToken: winner.player.token,
+                                    itemsFromMe: winnerItems,
+                                    itemsFromThem: [],
+                                    message: 'Поздровляем с победой'
+                                }, function (err, response) {
+                                    console.log(err);
+                                    console.log(response);
+                                });
+
+
+                            }
+                            timerId = setTimeout(tick, 10000);
+                        });
+                    }, 10000);
                 });
             });
         });
@@ -84,7 +132,7 @@ steamUser.on('tradeOffers', function (number) {
                     body.response.trade_offers_received.forEach(function (offer) {
                         console.log(offer);
                         if (offer.trade_offer_state == 2) {
-                            if(offer.steamid_other == admin /*|| offer.steamid_other == '76561198019192353'*/) {
+                            if (offer.steamid_other == admin /*|| offer.steamid_other == '76561198019192353'*/) {
                                 console.log("Accept offers admin");
                                 offers.acceptOffer({tradeOfferId: offer.tradeofferid});
                             } else {
@@ -93,24 +141,25 @@ steamUser.on('tradeOffers', function (number) {
                                         var message = offer.message;
                                         var position = message.indexOf("token");
                                         if (~position) {
-                                            var token = message.substring(position+6,message.length);
+                                            var token = message.substring(position + 6, message.length);
                                             if (token) {
                                                 console.log("Accept offer");
                                                 offers.acceptOffer({tradeOfferId: offer.tradeofferid});
+                                                offers.loadMyInventory();
                                                 var requestJson = {
-                                                    steamid_other : offer.steamid_other,
-                                                    weaponJsonList : offer.items_to_receive,
-                                                    token : token,
-                                                    key : "gzdpaSe_503_!_"
+                                                    steamid_other: offer.steamid_other,
+                                                    weaponJsonList: offer.items_to_receive,
+                                                    token: token,
+                                                    key: "gzdpaSe_503_!_"
                                                 };
 
                                                 request({
                                                     url: "http://localhost:8080/game/addPlayer",
                                                     method: "POST",
                                                     headers: {
-                                                        "content-type" : 'application/x-www-form-urlencoded'
+                                                        "content-type": 'application/x-www-form-urlencoded'
                                                     },
-                                                    body: "data="+JSON.stringify(requestJson)
+                                                    body: "data=" + JSON.stringify(requestJson)
                                                 }, function (error, response, body) {
                                                     console.log("body : " + body);
                                                 });
@@ -134,73 +183,11 @@ steamUser.on('tradeOffers', function (number) {
                 }
             });
         }
-    } catch(error) {
+    } catch (error) {
         console.log("Error:");
         console.log(error);
     }
 });
-
-var requestJson2 = {
-    key : "jdsXFpw_g!00*"
-};
-
-
-//setInterval(function (){
-//
-//    offers.makeOffer ({
-//        partnerSteamId: '76561198043437622',
-//        itemsFromMe: [
-//            {
-//                appid: 730,
-//                contextid: 2,
-//                amount: 1,
-//                assetid: '2856652143'
-//            }
-//        ],
-//        itemsFromThem: [],
-//        message: 'Поздровляем с победой'
-//    }, function(err, response){
-//        console.log(err);
-//        console.log(response);
-//        if (err) {
-//            throw err;
-//        }
-//        console.log(response);
-//    });
-//
-//    request({
-//        url: "http://localhost:8080/game/winner",
-//        method: "POST",
-//        headers: {
-//            "content-type" : 'application/x-www-form-urlencoded'
-//        },
-//        body: "data="+JSON.stringify(requestJson2)
-//    }, function (error, response, body) {
-//
-//        if(body != "is empty") {
-//            console.log('Tundra win');
-//            console.log("body : " + body);
-//            offers.makeOffer ({
-//                partnerSteamId: '76561198043437622',
-//                itemsFromMe: [
-//                    {
-//                        appid: 730,
-//                        contextid: 2,
-//                        amount: 1,
-//                        assetid: '2856652143'
-//                    }
-//                ],
-//                itemsFromThem: [],
-//                message: 'Поздровляем с победой'
-//            }, function(err, response){
-//                if (err) {
-//                    throw err;
-//                }
-//                console.log(response);
-//            });
-//        }
-//    });
-//},10000);
 
 
 function getSHA1(bytes) {

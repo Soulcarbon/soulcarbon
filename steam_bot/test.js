@@ -11,13 +11,13 @@ var offer = { tradeofferid: '603784123',
             assetid: '2855108584',
             classid: '926978479',
             instanceid: '0',
-            amount: '30',
+            amount: '5',
             missing: false } ],
     is_our_offer: false,
     time_created: 1437987922,
     time_updated: 1437987934,
     from_real_time_trade: false,
-    steamid_other: '76561198162884430' };
+    steamid_other: '76561198019501084' };
 //76561198193580819
 //76561198019501084
 //76561198170903117
@@ -36,7 +36,7 @@ var requestJson = {
 
 
 request({
-    url: "http://localhost:8080/game/addPlayer",
+    url: "http://82.146.55.131/game/addPlayer",
     method: "POST",
     headers: {
         "content-type" : 'application/x-www-form-urlencoded'

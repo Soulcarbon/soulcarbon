@@ -33,9 +33,28 @@ public class Weapon extends AbstractEntity {
     @Column(unique = true, name="class_id")
     private String classId;
 
+    private String assetId;
+
+    public String getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
+    }
+
     @Transient
     private String userSteamId;
 
+    private String appId;
+
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId;
+    }
 
     public String getUserSteamId() {
         return userSteamId;

@@ -11,6 +11,24 @@ body{
     color:white;
 }
 
+.instruction-text {
+    margin: 20px 0;
+    font-size: 20px;
+}
+
+.nickname{
+    font-size: 28px;
+    color:#89F24A;
+}
+
+.nickname:hover{
+    color:#89F24A;
+}
+
+.nickname:visited{
+    color:#89F24A;
+}
+
 .language {
     padding: 10px;
     background: #cccccc;

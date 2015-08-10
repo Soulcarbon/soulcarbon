@@ -62,6 +62,7 @@ public class GameController {
             for (int i = 0; i < weaponJsonList.size(); i++) {
                 LinkedHashMap<String,Object> weaponJson = weaponJsonList.get(i);
                 String classId = (String) weaponJson.get("classid");
+                String assetId = (String) weaponJson.get("assetid");
                 Integer amount = Integer.parseInt((String) weaponJson.get("amount"));
                 Weapon weapon = weaponRepository.getSingleEntityByFieldAndValue(Weapon.class, "classId", classId);
                 if(weapon == null) {
@@ -83,6 +84,7 @@ public class GameController {
                         totalCost.addPrice(weapon.getPrice());
                     }
                 }
+                weapon.setAssetId(assetId);
             }
 
             if(totalCost.getUsd() < 1e-7){
