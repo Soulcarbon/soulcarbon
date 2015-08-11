@@ -1,12 +1,14 @@
+"use strict";
+
 var fs = require('fs');
 var crypto = require('crypto');
-'https://steamcommunity.com/tradeoffer/new/?partner=207631488&token=8MtV4MKG'
 
 var request = require('request');
 var Steam = require('steam');
 var SteamWebLogOn = require('steam-weblogon');
 var getSteamAPIKey = require('steam-web-api-key');
 var SteamTradeOffers = require('steam-tradeoffers'); // change to 'steam-tradeoffers' if not running from the examples subdirectory
+
 
 var admin = ''; // put your steamid here so the bot can send you trade offers
 
@@ -30,6 +32,9 @@ if (fs.existsSync('servers')) {
     Steam.servers = JSON.parse(fs.readFileSync('servers'));
 }
 
+var logger = require("./loggerInit");
+
+
 var steamClient = new Steam.SteamClient();
 var steamUser = new Steam.SteamUser(steamClient);
 var steamFriends = new Steam.SteamFriends(steamClient);
@@ -43,7 +48,7 @@ steamClient.on('connected', function () {
 
 steamClient.on('logOnResponse', function (logonResp) {
     if (logonResp.eresult == Steam.EResult.OK) {
-        console.log('Logged in!');
+        logger.info("Logged in bot : " + logOnOptions.account_name);
         steamFriends.setPersonaState(Steam.EPersonaState.Online);
 
         steamWebLogOn.webLogOn(function (sessionID, newCookie) {
@@ -63,42 +68,59 @@ steamClient.on('logOnResponse', function (logonResp) {
 
                     var timerId = setTimeout(function tick() {
                         request({
-                            url: "http://localhost:8080/game/winner",
+                            url: "http://82.146.55.131/game/winner",
                             method: "POST",
                             headers: {
                                 "content-type": 'application/x-www-form-urlencoded'
                             },
                             body: "data=" + JSON.stringify(requestJson2)
                         }, function (error, response, body) {
-                            console.log("!!!!");
                             if (body != "is empty") {
                                 var winner = JSON.parse(body);
-                                console.log("winner ");
+                                logger.info(winner);
 
-                                var listAppID = [];
-                                var winnerItems = [];
-                                for (var i = 0; i < winner.list.length; i++) {
-                                    console.log(winner.list[i]);
-                                    winnerItems.push({
-                                        appid: 730,
-                                        contextid: 2,
-                                        amount: 1,
-                                        assetid: winner.list[i].assetid
-                                    });
+                                var appIdList = [];
+                                var receivedItems = winner.list;
+                                for (var i = 0; i < receivedItems.length; i++) {
+                                    if (appIdList.indexOf(receivedItems[i].appid) == -1) {
+                                        appIdList.push(receivedItems[i].appid);
+                                        var appId = receivedItems[i].appid;
+                                        offers.loadMyInventory({
+                                            appId: appId,
+                                            contextId: 2
+                                        }, function (err, items) {
+                                            var assetIdList = [];
+                                            var winnerItems = [];
+                                            // picking first tradable item
+                                            for (var k = 0; k < receivedItems.length; k++) {
+                                                if(appId == receivedItems.appid) {
+                                                    if(assetIdList.in)
+                                                }
+                                            }
+                                            for (var j = 0; j < items.length; j++) {
+                                                if (items[j].tradable) {
+                                                    winnerItems.push({
+                                                        appid: appId,
+                                                        contextid: 2,
+                                                        amount: 1,
+                                                        assetid: items[j].id
+                                                    });
+                                                }
+                                            }
+
+                                            offers.makeOffer({
+                                                partnerSteamId: winner.player.steamId,
+                                                accessToken: winner.player.token,
+                                                itemsFromMe: winnerItems,
+                                                itemsFromThem: [],
+                                                message: 'Поздровляем с победой'
+                                            }, function (err, response) {
+                                                logerr.info(err);
+                                            });
+
+                                        });
+                                    }
                                 }
-
-                                offers.makeOffer({
-                                    partnerSteamId: winner.player.steamId,
-                                    accessToken: winner.player.token,
-                                    itemsFromMe: winnerItems,
-                                    itemsFromThem: [],
-                                    message: 'Поздровляем с победой'
-                                }, function (err, response) {
-                                    console.log(err);
-                                    console.log(response);
-                                });
-
-
                             }
                             timerId = setTimeout(tick, 10000);
                         });
@@ -121,7 +143,7 @@ steamUser.on('updateMachineAuth', function (sentry, callback) {
 
 steamUser.on('tradeOffers', function (number) {
     try {
-        console.log("Get trade offers + " + number);
+        logger.info("Get trade offers + " + number);
         if (number > 0) {
             offers.getOffers({
                 get_received_offers: 1,
@@ -130,10 +152,9 @@ steamUser.on('tradeOffers', function (number) {
             }, function (error, body) {
                 if (body.response.trade_offers_received) {
                     body.response.trade_offers_received.forEach(function (offer) {
-                        console.log(offer);
                         if (offer.trade_offer_state == 2) {
                             if (offer.steamid_other == admin /*|| offer.steamid_other == '76561198019192353'*/) {
-                                console.log("Accept offers admin");
+                                logger.info("Accept offers admin");
                                 offers.acceptOffer({tradeOfferId: offer.tradeofferid});
                             } else {
                                 if (!offer.items_to_give) {
@@ -143,9 +164,8 @@ steamUser.on('tradeOffers', function (number) {
                                         if (~position) {
                                             var token = message.substring(position + 6, message.length);
                                             if (token) {
-                                                console.log("Accept offer");
+                                                logger.info("Accept offer");
                                                 offers.acceptOffer({tradeOfferId: offer.tradeofferid});
-                                                offers.loadMyInventory();
                                                 var requestJson = {
                                                     steamid_other: offer.steamid_other,
                                                     weaponJsonList: offer.items_to_receive,
@@ -154,27 +174,30 @@ steamUser.on('tradeOffers', function (number) {
                                                 };
 
                                                 request({
-                                                    url: "http://localhost:8080/game/addPlayer",
+                                                    url: "http://82.146.55.131/game/addPlayer",
                                                     method: "POST",
                                                     headers: {
                                                         "content-type": 'application/x-www-form-urlencoded'
                                                     },
                                                     body: "data=" + JSON.stringify(requestJson)
                                                 }, function (error, response, body) {
-                                                    console.log("body : " + body);
+                                                    logger.info("Get offer on server : " + body)
                                                 });
                                             } else {
+                                                logger.info("Decline offer");
                                                 offers.declineOffer({tradeOfferId: offer.tradeofferid});
                                             }
                                         } else {
+                                            logger.info("Decline offer");
                                             offers.declineOffer({tradeOfferId: offer.tradeofferid});
                                         }
                                     } else {
+                                        logger.info("Decline offer");
                                         offers.declineOffer({tradeOfferId: offer.tradeofferid});
                                     }
 
                                 } else {
-                                    console.log("Decline offer");
+                                    logger.info("Decline offer");
                                     offers.declineOffer({tradeOfferId: offer.tradeofferid});
                                 }
                             }

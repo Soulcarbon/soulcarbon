@@ -7,17 +7,16 @@ body{
 
     /*background-attachment: fixed;*/
     /*background-size: 100%;*/
-    font-size: 18px;
+    font-size: 21px;
     color:white;
 }
 
 .instruction-text {
     margin: 20px 0;
-    font-size: 20px;
 }
 
 .nickname{
-    font-size: 28px;
+    font-size: 23px;
     color:#89F24A;
 }
 
@@ -185,13 +184,11 @@ body {
     text-align:center;
 }
 .span1{
-    font-size: 22px;
     color:#FEF90E;
     font-weight:bold ;
 }
 .span2{
     color:#89F24A;
-    font-size: 20px;
     font-weight:bold ;
 }
 .vk{
@@ -351,7 +348,7 @@ img.fix-size{
 }
 
 .indent{
-    margin-left:60px;
+    margin-left:33px;
 }
 .game{
      background:linear-gradient(to bottom left, #bbb, white);
@@ -380,8 +377,8 @@ img.fix-size{
     left:-30px;
 }
 
-.padding-30{
-    padding-left: 30px;
+.margin-50 {
+    margin-left: 50px;
 }
 table.table-info {
     overflow: hidden;
@@ -392,26 +389,63 @@ table.table-info>tbody>tr>td, table.table-info>tbody>tr>th{
     text-align: center;
     position: relative;
 }
-.table-info td:hover::after,
-.table-info th:hover::after {
-    content: "";
-    position: absolute;
-    background-color: #a0a0a0;
-    left: 0;
-    top: -5000px;
-    height: 10000px;
-    width: 100%;
-    z-index: -1;
-}
+/*.table-info td:hover::after,*/
+/*.table-info th:hover::after {*/
+    /*content: "";*/
+    /*position: absolute;*/
+    /*background-color: #a0a0a0;*/
+    /*left: 0;*/
+    /*top: -5000px;*/
+    /*height: 10000px;*/
+    /*width: 100%;*/
+    /*z-index: -1;*/
+/*}*/
 
-.table-hover>tbody>tr:hover{
-    background-color: #a0a0a0;
+/*.table-hover>tbody>tr:hover{*/
+    /*background-color: #a0a0a0;*/
+/*}*/
+
+@media (max-width: 1141px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in {
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
 }
 
 .first-row{
     height: 330px;
 }
-
 
 /* Making the header responsive */
 @media all and (max-width: 1100px) {
@@ -429,26 +463,9 @@ table.table-info>tbody>tr>td, table.table-info>tbody>tr>th{
         margin-left: 20px;
     }
 }
-@media all and (max-width: 800px) {
-    .logo .logo2{
-        width: 70px;
-        height: 45px;
-    }
 
-    .logo{
-        padding: 10px 15px;
-    }
 
-}
-
-@media all and (max-width: 690px) {
-    .logo{
-        padding: 5px 15px;
-    }
-
-}
-
-@media all and (max-width: 650px) {
+@media all and (max-width: 1141px) {
     .logo .logo2{
         width: 70px;
         height: 45px;

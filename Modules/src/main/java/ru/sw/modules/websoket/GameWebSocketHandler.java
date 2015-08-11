@@ -25,7 +25,7 @@ import java.util.List;
 
 public class GameWebSocketHandler extends TextWebSocketHandler {
 
-    public  Object monitor = new Object();
+    public Object monitor = new Object();
     public  Game activeGame = new Game();
     public  List<WebSocketSession> sessionList = new ArrayList<>();
     public  List<Winner> winners = new ArrayList<>();
@@ -42,35 +42,37 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     private SettingsRepository settingsRepository;
 
     @Override
-    public synchronized void afterConnectionEstablished(WebSocketSession session) throws Exception {
-        try {
-            if (activeGame.getId() == null) {
-                gameRepository.create(activeGame);
+    public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+        synchronized (monitor) {
+            try {
+                if (activeGame.getId() == null) {
+                    gameRepository.create(activeGame);
+                }
+            } catch (Exception e) {
+                logger.warn(e.getMessage());
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-            e.printStackTrace();
+            sessionList.add(session);
+            activeGame.setCountVisitors(sessionList.size());
+            if (startGame != null) {
+                activeGame.setSecondsFromStartGame(secondsAfterStartGame());
+            }
+            updateSession();
         }
-        sessionList.add(session);
-        activeGame.setCountVisitors(sessionList.size());
-        if(startGame != null) {
-            activeGame.setSecondsFromStartGame(secondsAfterStartGame());
-        }
-        updateSession();
-        System.err.println("Session open");
     }
 
     @Override
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
-        System.err.println("------------------");
-        System.err.println(message.getPayload().toString());
+
     }
 
     @Override
-    public synchronized void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-        sessionList.remove(session);
-        activeGame.setCountVisitors(sessionList.size());
-        updateSession();
+    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+        synchronized (monitor) {
+            sessionList.remove(session);
+            activeGame.setCountVisitors(sessionList.size());
+            updateSession();
+        }
     }
 
     private Integer secondsAfterStartGame() {
@@ -79,104 +81,105 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
     }
 
     public void startGame(){
-        activeGame.setState(Game.GameState.Active);
-        startGame = Calendar.getInstance();
-        activeGame.setSecondsFromStartGame(secondsAfterStartGame());
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    List<Settings> settings = settingsRepository.list(Settings.class);
-                    if(settings.isEmpty()) {
-                        throw new PlatofrmExecption("settings not set" , PlatofrmExecption.Type.ActionError);
-                    }
-                    Thread.sleep(settings.get(0).getSecondsBeforeGameOver() * 1000);
-                    synchronized (monitor) {
-                        activeGame.setState(Game.GameState.Finished);
-                        startGame = null;
-
-                        Integer countBonuses = 0;
-
-                        for(Player player : activeGame.getPlayers()) {
-                            if(player.getNickName().contains(settings.get(0).getSiteName())){
-                                countBonuses++;
-                            }
+        synchronized (monitor) {
+            activeGame.setState(Game.GameState.Active);
+            startGame = Calendar.getInstance();
+            activeGame.setSecondsFromStartGame(secondsAfterStartGame());
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        List<Settings> settings = settingsRepository.list(Settings.class);
+                        if (settings.isEmpty()) {
+                            throw new PlatofrmExecption("settings not set", PlatofrmExecption.Type.ActionError);
                         }
+                        Thread.sleep(settings.get(0).getSecondsBeforeGameOver() * 1000);
+                        synchronized (monitor) {
+                            activeGame.setState(Game.GameState.Finished);
+                            startGame = null;
 
-                        Integer min = 0;
-                        Integer max = 100 + countBonuses*settings.get(0).getBonus();
-                        Double generatedValue = min + Math.random() * (max - min);
-                        System.err.println("Generated value"  + generatedValue);
-                        Player winner = null;
-                        Winner winnerEntry = new Winner();
-                        double sum = 0;
-                        for(Player player : activeGame.getPlayers()) {
-                            if(player.isWinner()) {
-                                winner = player;
-                            }
-                            winnerEntry.getList().addAll(player.getWeaponList());
-                        }
-                        if(winner == null) {
+                            Integer countBonuses = 0;
 
                             for (Player player : activeGame.getPlayers()) {
-                                sum += player.getProbability();
-                                if(player.getNickName().contains(settings.get(0).getSiteName())){
-                                    sum += settings.get(0).getBonus();
+                                if (player.getNickName().contains(settings.get(0).getSiteName())) {
+                                    countBonuses++;
                                 }
-                                if (generatedValue < sum) {
+                            }
+
+                            Integer min = 0;
+                            Integer max = 100 + countBonuses * settings.get(0).getBonus();
+                            Double generatedValue = min + Math.random() * (max - min);
+                            logger.info("Generated value" + generatedValue);
+                            Player winner = null;
+                            Winner winnerEntry = new Winner();
+                            double sum = 0;
+                            for (Player player : activeGame.getPlayers()) {
+                                if (player.isWinner()) {
                                     winner = player;
-                                    break;
+                                }
+                                winnerEntry.getList().addAll(player.getWeaponList());
+                            }
+                            if (winner == null) {
+
+                                for (Player player : activeGame.getPlayers()) {
+                                    sum += player.getProbability();
+                                    if (player.getNickName().contains(settings.get(0).getSiteName())) {
+                                        sum += settings.get(0).getBonus();
+                                    }
+                                    if (generatedValue < sum) {
+                                        winner = player;
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        //Записсываем выигрыш
+                            //Записсываем выигрыш
 
-                        winnerEntry.setPlayer(winner);
-                        List<Integer> indexes = new ArrayList<Integer>();
-                        double totalPercent = 0.0;
-                        int i = 0;
-                        for(Weapon weapon : winnerEntry.getList()){
+                            winnerEntry.setPlayer(winner);
+                            List<Integer> indexes = new ArrayList<Integer>();
+                            double totalPercent = 0.0;
+                            int i = 0;
+                            for (Weapon weapon : winnerEntry.getList()) {
 
-                            if(weapon.getUserSteamId().equals(winner.getSteamId())) {
-                                continue;
+                                if (weapon.getUserSteamId().equals(winner.getSteamId())) {
+                                    continue;
+                                }
+
+                                Double tempPercent = weapon.getPrice().getRub() / activeGame.getTotal().getRub() * 100;
+                                if (tempPercent + totalPercent <= settings.get(0).getRate() + 3) {
+                                    totalPercent += tempPercent;
+                                    indexes.add(i);
+                                }
+                                i++;
                             }
-
-                            Double tempPercent = weapon.getPrice().getRub() / activeGame.getTotal().getRub() * 100;
-                            if(tempPercent+totalPercent <= settings.get(0).getRate()+3) {
-                                totalPercent += tempPercent;
-                                indexes.add(i);
+                            logger.info("Number of won items : " + indexes.size() + ", game id: " + activeGame.getId());
+                            for (int removeIndex : indexes) {
+                                winnerEntry.getList().remove(removeIndex);
                             }
-                            i++;
-                        }
-                        logger.info("Number of won items : " + indexes.size() + ", game id: " + activeGame.getId());
-                        for(int removeIndex : indexes) {
-                            winnerEntry.getList().remove(removeIndex);
-                        }
-                        winners.add(winnerEntry);
+                            winners.add(winnerEntry);
 
 
-                        System.err.println("winner:" + winner.getNickName());
-                        activeGame.setCountPlayers(activeGame.getPlayers().size());
-                        activeGame.setWinnerNickName(winner.getNickName());
-                        gameRepository.update(activeGame);
-                        activeGame = new Game();
-                        activeGame.setLastWinnerNickName(winner.getNickName());
-                        activeGame.setLastWinnerImageUrl(winner.getImageUrl());
-                        gameRepository.create(activeGame);
-                        updateSession();
+                            logger.info("winner:" + winner.getNickName());
+                            activeGame.setCountPlayers(activeGame.getPlayers().size());
+                            activeGame.setWinnerNickName(winner.getNickName());
+                            gameRepository.update(activeGame);
+                            activeGame = new Game();
+                            activeGame.setLastWinnerNickName(winner.getNickName());
+                            activeGame.setLastWinnerImageUrl(winner.getImageUrl());
+                            gameRepository.create(activeGame);
+                            updateSession();
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
                 }
-            }
-        }).start();
-        updateSession();
+            }).start();
+            updateSession();
+        }
     }
 
 
     public void updateSession() {
-        synchronized (monitor) {
             for (WebSocketSession session : sessionList) {
                 try {
                     session.sendMessage(new TextMessage(objectMapper.writeValueAsString(activeGame)));
@@ -184,6 +187,5 @@ public class GameWebSocketHandler extends TextWebSocketHandler {
                     throw new PlatofrmExecption(e.getMessage(), PlatofrmExecption.Type.ActionError);
                 }
             }
-        }
     }
 }
